@@ -3,612 +3,548 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Calthera — Klinik Psikologi & Tumbuh Kembang Anak di Pekanbaru. Konseling, asesmen, psikoterapi, dan layanan terapi anak." />
-  <title>Calthera | Klinik Psikologi & Tumbuh Kembang Anak</title>
+  <title>Calthera — Klinik Psikologi & Tumbuh Kembang Anak</title>
+  <meta name="description" content="Klinik psikologi & tumbuh kembang anak di Pekanbaru. Screening, terapi anak, konseling, asesmen psikologis, dan psikoterapi." />
 
   <style>
     :root{
       --green:#88ab8e;
       --orange:#ffb570;
       --cream:#f6f0eb;
-      --ink:#0f172a;
-      --muted:#64748b;
-      --line:rgba(15,23,42,.10);
-      --card:#ffffff;
-      --shadow:0 16px 40px rgba(15,23,42,.10);
-      --radius:18px;
-      --radius2:24px;
+
+      --text:#0f172a;
+      --muted:#475569;
+      --border:rgba(15,23,42,.10);
+
+      --card:rgba(255,255,255,.78);
+      --shadow:0 18px 55px rgba(2,6,23,.10);
+      --radius:22px;
+
       --max:1120px;
     }
+
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--ink);
-      background:
-        radial-gradient(900px 500px at 15% 10%, rgba(255,181,112,.25), transparent 55%),
-        radial-gradient(900px 500px at 85% 0%, rgba(136,171,142,.25), transparent 60%),
-        linear-gradient(#fff, #fff);
-    }
+    html,body{margin:0;padding:0;font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; color:var(--text); background: #fff;}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
-    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      background:rgba(246,240,235,.75);
-      border:1px solid var(--line);
-      color:rgba(15,23,42,.80);
-      font-weight:600;
-      backdrop-filter: blur(8px);
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px;}
+
+    /* Subtle background */
+    .bg{
+      position:fixed; inset:0; z-index:-1;
+      background:
+        radial-gradient(900px 500px at 15% 18%, rgba(136,171,142,.25), transparent 60%),
+        radial-gradient(900px 520px at 70% 22%, rgba(255,181,112,.25), transparent 60%),
+        radial-gradient(900px 520px at 45% 70%, rgba(246,240,235,.75), transparent 60%),
+        linear-gradient(180deg, #fff, #fff);
     }
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 0 6px rgba(136,171,142,.18)}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,.65);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px;}
+    .brand .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+      box-shadow: 0 10px 25px rgba(2,6,23,.08);
+    }
+    .brand .logo img{width:28px;height:28px}
+    .brand .t{line-height:1.1}
+    .brand .t strong{display:block;font-size:14px}
+    .brand .t span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;align-items:center}
+    nav a{font-weight:600;font-size:14px;color:rgba(15,23,42,.85)}
+    nav a:hover{color:rgba(15,23,42,1)}
+
+    .actions{display:flex;gap:10px;align-items:center}
     .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:14px 16px;border-radius:999px;
-      border:1px solid var(--line);
-      font-weight:700;
-      transition:.18s ease;
-      cursor:pointer;
-      user-select:none;
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      font-weight:700; font-size:14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      box-shadow: 0 10px 25px rgba(2,6,23,.06);
+      transition: transform .15s ease, box-shadow .15s ease;
       white-space:nowrap;
     }
-    .btn:hover{transform:translateY(-1px)}
-    .btn-primary{
-      background:linear-gradient(135deg,var(--green), #6e9b7a);
-      color:#fff;border-color:rgba(255,255,255,.2);
-      box-shadow:0 12px 28px rgba(136,171,142,.35);
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 14px 35px rgba(2,6,23,.10)}
+    .btn.primary{
+      background: color-mix(in srgb, var(--green) 86%, white);
+      border-color: color-mix(in srgb, var(--green) 60%, white);
     }
-    .btn-ghost{background:rgba(255,255,255,.75)}
-    .btn-orange{
-      background:linear-gradient(135deg,var(--orange), #ff9f4a);
-      color:#1f2937;border-color:rgba(0,0,0,.06);
-      box-shadow:0 12px 28px rgba(255,181,112,.35);
+    .btn.orange{
+      background: color-mix(in srgb, var(--orange) 86%, white);
+      border-color: color-mix(in srgb, var(--orange) 60%, white);
     }
 
-    /* NAV */
-    .nav{
-      position:sticky;top:0;z-index:50;
-      background:rgba(255,255,255,.70);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand .logo-wrap{
-      width:42px;height:42px;border-radius:14px;
-      background:rgba(246,240,235,.90);
-      border:1px solid var(--line);
-      display:grid;place-items:center;
-      overflow:hidden;
-    }
-    .brand img{width:30px;height:30px}
-    .brand .name{display:flex;flex-direction:column;line-height:1.1}
-    .brand .name strong{font-size:14px;letter-spacing:.2px}
-    .brand .name span{font-size:12px;color:var(--muted);font-weight:600}
-    .nav-links{display:flex;gap:18px;align-items:center}
-    .nav-links a{font-weight:700;color:rgba(15,23,42,.76)}
-    .nav-links a:hover{color:rgba(15,23,42,.95)}
-    .nav-cta{display:flex;gap:10px;align-items:center}
-    .menu-btn{display:none}
-    @media (max-width: 900px){
-      .nav-links{display:none}
-      .menu-btn{display:inline-flex}
-    }
-
-    /* HERO */
-    .hero{padding:42px 0 18px}
+    /* Hero */
+    .hero{padding:44px 0 18px;}
     .hero-grid{
-      display:grid;grid-template-columns: 1.15fr .85fr;
-      gap:22px;align-items:stretch;
+      display:grid;
+      grid-template-columns: 1.25fr;
+      gap:18px;
+      align-items:start;
+    }
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
     .hero-card{
-      background:rgba(255,255,255,.75);
-      border:1px solid var(--line);
-      border-radius:var(--radius2);
-      padding:28px;
-      box-shadow: var(--shadow);
+      padding:30px 28px;
       overflow:hidden;
       position:relative;
     }
     .hero-card:before{
       content:"";
-      position:absolute;inset:-1px;
-      background: radial-gradient(600px 250px at 15% 20%, rgba(255,181,112,.35), transparent 55%),
-                  radial-gradient(600px 250px at 85% 0%, rgba(136,171,142,.35), transparent 60%);
-      pointer-events:none;
-      opacity:.75;
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 240px at 10% 20%, rgba(136,171,142,.25), transparent 55%),
+        radial-gradient(700px 240px at 70% 18%, rgba(255,181,112,.30), transparent 55%),
+        radial-gradient(700px 240px at 40% 80%, rgba(246,240,235,.85), transparent 55%);
+      z-index:-1;
     }
-    .hero-card > *{position:relative}
-    h1{margin:14px 0 10px;font-size:44px;line-height:1.05;letter-spacing:-.8px}
-    .sub{color:rgba(15,23,42,.72);font-weight:600;font-size:16px;line-height:1.55;max-width:62ch}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-    .stat{
-      background:rgba(255,255,255,.75);
-      border:1px solid var(--line);
-      border-radius:16px;padding:14px 14px;
+    .h1{
+      font-size:54px;
+      line-height:1.02;
+      margin:0 0 14px;
+      letter-spacing:-.02em;
     }
-    .stat b{display:block;font-size:14px}
-    .stat small{color:var(--muted);font-weight:700}
-    .hero-side{
-      background:rgba(255,255,255,.75);
-      border:1px solid var(--line);
-      border-radius:var(--radius2);
-      padding:18px;
-      box-shadow: var(--shadow);
-      display:flex;flex-direction:column;gap:12px;
+    .lead{
+      margin:0;
+      font-size:16px;
+      color:rgba(15,23,42,.78);
+      line-height:1.6;
+      max-width:62ch;
     }
-    .photo{
+    .cta{display:flex; gap:12px; margin-top:20px; flex-wrap:wrap}
+    .meta-row{
+      display:flex; gap:12px; margin-top:18px; flex-wrap:wrap
+    }
+    .meta{
+      padding:12px 14px;
       border-radius:18px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      min-width:220px;
+    }
+    .meta b{display:block;font-size:13px}
+    .meta span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+
+    /* (3) moved below: full-width info bar */
+    .focus-bar{
+      padding:18px 18px;
+      margin-top:16px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .badge-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      font-weight:700;
+      font-size:13px;
+      color:rgba(15,23,42,.85);
+    }
+    .focus-box{
+      flex: 1 1 520px;
+      display:flex; gap:12px; align-items:flex-start;
+      padding:16px 16px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.65);
+    }
+    .icon{
+      width:38px;height:38px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      background: rgba(255,181,112,.25);
+      border:1px solid rgba(255,181,112,.35);
+      font-weight:900;
+    }
+    .focus-box h3{margin:0 0 6px;font-size:16px}
+    .focus-box p{margin:0;color:var(--muted);line-height:1.6}
+
+    /* Sections */
+    section{padding:34px 0}
+    .section-title{
+      margin:0 0 6px;
+      font-size:34px; letter-spacing:-.02em;
+    }
+    .section-sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:72ch;
+    }
+
+    /* Services (9): 3 horizontal groups + list down */
+    .services-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+    }
+    .svc{
+      padding:18px 18px;
+    }
+    .svc .tag{
+      width:36px;height:36px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      font-weight:900;
+      margin-bottom:10px;
+    }
+    .svc h3{margin:0 0 8px;font-size:18px}
+    .svc p{margin:0 0 12px;color:var(--muted);line-height:1.6}
+    .svc ul{margin:0;padding-left:18px;color:rgba(15,23,42,.85)}
+    .svc li{margin:8px 0;line-height:1.5}
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1.4fr .9fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    .gallery .big, .gallery .small{
+      border-radius: var(--radius);
       overflow:hidden;
-      border:1px solid var(--line);
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
       background:#fff;
     }
-    .badge-row{display:flex;gap:10px;flex-wrap:wrap}
-    .badge{
-      padding:10px 12px;border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(246,240,235,.70);
-      font-weight:800;font-size:12px;color:rgba(15,23,42,.76)
+    .gallery .big img{width:100%; height:100%; object-fit:cover; aspect-ratio: 16/9;}
+    .gallery .small{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:0;
     }
-    @media (max-width: 900px){
-      .hero-grid{grid-template-columns:1fr}
-      h1{font-size:38px}
-      .stats{grid-template-columns:1fr}
+    .gallery .small img{width:100%; height:100%; object-fit:cover; aspect-ratio: 16/10;}
+    .gallery .small img + img{border-top:1px solid var(--border)}
+
+    /* Contact */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap:16px;
+      align-items:stretch;
     }
-
-    /* SECTIONS */
-    section{padding:46px 0}
-    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
-    .section-head h2{margin:0;font-size:28px;letter-spacing:-.4px}
-    .section-head p{margin:0;color:var(--muted);font-weight:650;max-width:70ch;line-height:1.6}
-
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
-    .card{
-      background:rgba(255,255,255,.82);
-      border:1px solid var(--line);
-      border-radius:18px;
+    .info{
       padding:18px;
-      box-shadow: 0 10px 25px rgba(15,23,42,.06);
     }
-    .card h3{margin:0 0 8px;font-size:16px}
-    .card p{margin:0;color:rgba(15,23,42,.70);font-weight:600;line-height:1.55}
-    .icon{
-      width:42px;height:42px;border-radius:14px;
-      background:rgba(136,171,142,.15);
-      border:1px solid rgba(136,171,142,.25);
-      display:grid;place-items:center;
+    .info-card{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.65);
       margin-bottom:12px;
+    }
+    .info-card .ico{
+      width:38px;height:38px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid var(--border);
+      background: rgba(136,171,142,.18);
       font-weight:900;
-      color:rgba(15,23,42,.75)
     }
-    .icon.orange{
-      background:rgba(255,181,112,.18);
-      border-color:rgba(255,181,112,.32);
-    }
-    .icon.cream{
-      background:rgba(246,240,235,.95);
-      border-color:rgba(15,23,42,.08);
-    }
+    .info-card b{display:block}
+    .info-card span{display:block;color:var(--muted);margin-top:2px;line-height:1.5}
 
-    @media (max-width: 900px){
-      .grid-3,.grid-2{grid-template-columns:1fr}
+    .map{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+      background:#fff;
+      min-height:420px;
     }
+    .map iframe{width:100%;height:100%;border:0;min-height:420px}
 
-    /* PRICING */
-    .pricing-wrap{margin-top:16px;display:grid;grid-template-columns:1fr;gap:14px}
-    .pricing-group{border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.82);overflow:hidden}
-    .pricing-head{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:16px 18px;border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(246,240,235,.75), rgba(255,255,255,.60));
+    /* Footer */
+    footer{padding:26px 0 40px}
+    .foot{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+      padding-top:12px;
+      border-top:1px solid var(--border);
+      color:rgba(15,23,42,.75);
+      font-size:13px;
     }
-    .pricing-head h3{margin:0;font-size:15px}
-    .pricing-head span{font-weight:800;color:rgba(15,23,42,.65);font-size:12px}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:12px 18px;border-bottom:1px solid rgba(15,23,42,.06);text-align:left}
-    th{font-size:12px;color:rgba(15,23,42,.55);letter-spacing:.3px;text-transform:uppercase}
-    td{font-weight:650;color:rgba(15,23,42,.78)}
-    td:last-child{text-align:right;font-weight:900}
-    .note{padding:12px 18px;color:rgba(15,23,42,.60);font-weight:650}
-    .note b{color:rgba(15,23,42,.82)}
-    .muted{color:var(--muted)}
-    .tiny{font-size:12px;color:rgba(15,23,42,.55);font-weight:650;line-height:1.5}
+    .foot .left{display:flex;align-items:center;gap:12px}
+    .foot .left img{width:28px;height:28px}
 
-    /* GALLERY */
-    .gallery{
-      display:grid;grid-template-columns:repeat(12,1fr);
-      gap:12px;margin-top:16px;
-    }
-    .g{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#fff}
-    .g img{width:100%;height:100%;object-fit:cover}
-    .g1{grid-column:span 7;aspect-ratio:16/9}
-    .g2{grid-column:span 5;aspect-ratio:4/5}
-    .g3{grid-column:span 4;aspect-ratio:1/1}
-    .g4{grid-column:span 4;aspect-ratio:1/1}
-    .g5{grid-column:span 4;aspect-ratio:1/1}
-    @media (max-width: 900px){
+    /* Responsive */
+    @media (max-width: 980px){
+      nav ul{display:none}
+      .h1{font-size:44px}
+      .services-grid{grid-template-columns:1fr}
       .gallery{grid-template-columns:1fr}
-      .g1,.g2,.g3,.g4,.g5{grid-column:span 1;aspect-ratio:16/10}
-    }
-
-    /* CONTACT */
-    .contact-grid{display:grid;grid-template-columns: 1fr 1fr;gap:14px;margin-top:16px}
-    .contact-box{border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.82);padding:18px}
-    .contact-box h3{margin:0 0 10px;font-size:16px}
-    .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
-    .li{
-      display:flex;gap:10px;align-items:flex-start;
-      padding:12px;border:1px solid rgba(15,23,42,.08);border-radius:16px;background:rgba(246,240,235,.55)
-    }
-    .li b{display:block;font-size:13px}
-    .li span{color:rgba(15,23,42,.70);font-weight:650;font-size:13px;line-height:1.5}
-    iframe{width:100%;border:0;border-radius:16px;min-height:320px}
-    @media (max-width: 900px){
       .contact-grid{grid-template-columns:1fr}
     }
-
-    /* FOOTER */
-    footer{
-      padding:26px 0 36px;
-      border-top:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.65), rgba(246,240,235,.55));
-    }
-    .foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
-    .foot small{color:rgba(15,23,42,.55);font-weight:700}
   </style>
 </head>
 
 <body>
+  <div class="bg"></div>
 
-  <!-- NAV -->
-  <div class="nav">
+  <header>
     <div class="container">
-      <div class="nav-inner">
-        <a class="brand" href="#top" aria-label="Calthera home">
-          <div class="logo-wrap">
-            <img src="assets/logo.svg" alt="Logo Calthera" />
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Calthera">
+          <div class="logo">
+            <!-- FIX: pakai nama file yang benar -->
+            <img src="assetslogo.svg" alt="Logo Calthera" />
           </div>
-          <div class="name">
+          <div class="t">
             <strong>Calthera</strong>
             <span>Klinik Psikologi & Tumbuh Kembang Anak</span>
           </div>
         </a>
 
-        <nav class="nav-links" aria-label="Primary">
-          <a href="#layanan">Layanan</a>
-          <a href="#harga">Harga</a>
-          <a href="#klinik">Klinik</a>
-          <a href="#kontak">Kontak</a>
+        <nav aria-label="Navigasi">
+          <ul>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#klinik">Klinik</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
         </nav>
 
-        <div class="nav-cta">
-          <a class="btn btn-ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">
-            Instagram
-          </a>
-          <a class="btn btn-primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">
-            WhatsApp
-          </a>
-          <a class="btn btn-ghost menu-btn" href="#kontak">Menu</a>
+        <div class="actions">
+          <a class="btn" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- HERO -->
-  <main id="top" class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-card">
-          <div class="pill"><span class="dot"></span> Pendampingan profesional, hangat, dan terarah</div>
-          <h1>Dampingi tumbuh kembang anak dengan tenang dan terarah.</h1>
-          <p class="sub">
-            Calthera adalah klinik psikologi & tumbuh kembang anak di Pekanbaru.
-            Kami melayani <b>screening</b>, <b>terapi anak</b>, <b>konseling</b>, <b>asesmen psikologis</b>, dan <b>psikoterapi</b>.
-          </p>
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="card hero-card">
+            <!-- (1) ganti “tenang” -> “profesional” -->
+            <h1 class="h1">Dampingi tumbuh kembang anak dengan profesional dan terarah.</h1>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">
-              Konsultasi via WhatsApp
-            </a>
-            <a class="btn btn-orange" href="#kontak">
-              Lihat Lokasi & Jam Buka
-            </a>
-            <a class="btn btn-ghost" href="#harga">
-              Cek Price List
-            </a>
-          </div>
-
-          <div class="stats">
-            <div class="stat">
-              <b>Senin–Sabtu</b>
-              <small>09:00–17:00</small>
-            </div>
-            <div class="stat">
-              <b>Offline & Online</b>
-              <small>Konseling & psikoterapi</small>
-            </div>
-            <div class="stat">
-              <b>Terapi Anak 60 menit</b>
-              <small>+ edukasi orang tua</small>
-            </div>
-          </div>
-        </div>
-
-        <aside class="hero-side">
-          <div class="photo">
-            <img src="assets/clinic-1.jpg" alt="Area klinik Calthera" />
-          </div>
-          <div class="badge-row">
-            <div class="badge">Tumbuh Kembang Anak</div>
-            <div class="badge">Konseling & Psikoterapi</div>
-            <div class="badge">Asesmen Klinis</div>
-          </div>
-          <div class="card">
-            <div class="icon orange">★</div>
-            <h3>Fokus kami</h3>
-            <p>
-              Membantu anak & keluarga memahami kebutuhan, menyusun rencana, dan menjalankan terapi secara konsisten—dengan komunikasi yang mudah dipahami.
+            <p class="lead">
+              Calthera adalah klinik psikologi & tumbuh kembang anak di Pekanbaru.
+              Kami melayani <b>screening</b>, <b>terapi anak</b>, <b>konseling</b>, <b>asesmen psikologis</b>,
+              dan <b>psikoterapi</b>.
             </p>
+
+            <div class="cta">
+              <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
+              <a class="btn orange" href="#kontak">Lihat Lokasi & Jam Buka</a>
+              <a class="btn" href="#layanan">Lihat Layanan</a>
+            </div>
+
+            <!-- (2) hapus offline/online + terapi anak 60 menit; tinggal jam buka aja -->
+            <div class="meta-row">
+              <div class="meta">
+                <b>Senin–Sabtu</b>
+                <span>09:00–17:00</span>
+              </div>
+            </div>
           </div>
-        </aside>
-      </div>
-    </div>
-  </main>
 
-  <!-- LAYANAN -->
-  <section id="layanan">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Layanan Calthera</h2>
-          <p>Dipisahkan sesuai grouping yang kamu minta: tumbuh kembang, konseling & psikoterapi, serta asesmen klinis.</p>
-        </div>
-        <a class="btn btn-primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Tanya Admin</a>
-      </div>
+          <!-- (3) card kanan dipindah ke bawah (jadi horizontal memanjang) -->
+          <div class="card focus-bar" aria-label="Area klinik Calthera">
+            <div class="badge-row">
+              <span class="pill">Tumbuh Kembang Anak</span>
+              <span class="pill">Konseling & Psikoterapi</span>
+              <span class="pill">Asesmen Klinis</span>
+            </div>
 
-      <div class="grid-3">
-        <div class="card">
-          <div class="icon">TK</div>
-          <h3>Tumbuh Kembang</h3>
-          <p>Screening tumbuh kembang, screening terapi, terapi wicara, okupasi, perilaku, sensori integrasi, fisioterapi, dan remedial.</p>
-        </div>
-        <div class="card">
-          <div class="icon orange">KP</div>
-          <h3>Konseling & Psikoterapi</h3>
-          <p>Konseling anak & dewasa, pasangan, pra-nikah, keluarga, serta sesi psikoterapi (offline & online).</p>
-        </div>
-        <div class="card">
-          <div class="icon cream">AK</div>
-          <h3>Asesmen Klinis</h3>
-          <p>Asesmen anak–remaja dan dewasa: kecerdasan, kesiapan belajar, kesehatan mental, kepribadian, pengembangan karir, dan asesmen klinis.</p>
+            <div class="focus-box">
+              <div class="icon">★</div>
+              <div>
+                <h3>Fokus kami</h3>
+                <p>
+                  Membantu anak & keluarga memahami kebutuhan, menyusun rencana, dan menjalankan pendampingan secara konsisten—dengan komunikasi yang mudah dipahami.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- (4) pill kecil atas dihapus: sudah (nggak ada) -->
         </div>
       </div>
+    </section>
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>Bundling terapi</h3>
-          <p>Untuk progres yang lebih konsisten: paket 8 / 12 / 16 sesi. Cocok untuk anak yang butuh program berkelanjutan.</p>
-        </div>
-        <div class="card">
-          <h3>Komunikasi yang jelas</h3>
-          <p>Setiap sesi fokus pada tujuan yang terukur + edukasi orang tua, supaya latihan di rumah nyambung dengan terapi di klinik.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- LAYANAN -->
+    <section id="layanan">
+      <div class="container">
+        <h2 class="section-title">Layanan Calthera</h2>
+        <!-- (6) hapus kalimat “dipisahkan sesuai grouping ...” -->
+        <p class="section-sub">
+          Pilih layanan sesuai kebutuhan anak, remaja, dan dewasa. Untuk tanya jadwal & rekomendasi awal, langsung chat admin via WhatsApp.
+        </p>
 
-  <!-- HARGA -->
-  <section id="harga">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Price List</h2>
-          <p>Ringkas dan jelas. Jika kamu mau, nanti kita bisa bikin halaman khusus “Paket & Promo” terpisah.</p>
-        </div>
-        <a class="btn btn-ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Lihat Instagram</a>
-      </div>
-
-      <div class="pricing-wrap">
-
-        <div class="pricing-group">
-          <div class="pricing-head">
+        <!-- (7 & 9) list layanan per grup, 3 kolom horizontal -->
+        <div class="services-grid">
+          <div class="card svc">
+            <div class="tag">TK</div>
             <h3>Tumbuh Kembang Anak</h3>
-            <span>Terapi berdurasi 60 menit (termasuk edukasi orang tua)</span>
+            <p>Screening dan program terapi untuk mendukung perkembangan anak secara menyeluruh.</p>
+            <ul>
+              <li>Screening Tumbuh Kembang</li>
+              <li>Screening Terapi</li>
+              <li>Terapi Wicara</li>
+              <li>Terapi Okupasi</li>
+              <li>Terapi Perilaku</li>
+              <li>Sensori Integrasi</li>
+              <li>Fisioterapi</li>
+              <li>Terapi Remedial</li>
+            </ul>
           </div>
-          <table>
-            <thead>
-              <tr><th>Layanan</th><th style="text-align:right">Harga</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Screening Tumbuh Kembang</td><td>300K</td></tr>
-              <tr><td>Screening Terapi</td><td>225K</td></tr>
-              <tr><td>Terapi Wicara</td><td>140K</td></tr>
-              <tr><td>Terapi Okupasi</td><td>140K</td></tr>
-              <tr><td>Terapi Perilaku</td><td>140K</td></tr>
-              <tr><td>Sensori Integrasi</td><td>140K</td></tr>
-              <tr><td>Fisioterapi</td><td>140K</td></tr>
-              <tr><td>Terapi Remedial</td><td>140K</td></tr>
-            </tbody>
-          </table>
-          <div class="note">
-            <b>Bundling Terapi:</b> 8 sesi 1080K · 12 sesi 1560K · 16 sesi 1920K · Administrasi 100K
-          </div>
-        </div>
 
-        <div class="pricing-group">
-          <div class="pricing-head">
+          <div class="card svc">
+            <div class="tag">KP</div>
             <h3>Konseling & Psikoterapi</h3>
-            <span>Online & Offline tersedia</span>
+            <p>Pendampingan psikologis untuk individu, pasangan, dan keluarga (offline & online).</p>
+            <ul>
+              <li>Konseling Anak</li>
+              <li>Konseling Dewasa</li>
+              <li>Konseling Pasangan</li>
+              <li>Konseling Pra-Nikah</li>
+              <li>Konseling Keluarga</li>
+              <li>Sesi Psikoterapi</li>
+            </ul>
           </div>
-          <table>
-            <thead>
-              <tr><th>Layanan</th><th style="text-align:right">Harga</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Konseling Anak & Dewasa (Offline / 60 menit)</td><td>250K</td></tr>
-              <tr><td>Konseling Anak & Dewasa (Online / 60 menit)</td><td>150K</td></tr>
 
-              <tr><td>Konseling Keluarga (Offline / 90 menit)</td><td>499K</td></tr>
-              <tr><td>Konseling Keluarga (Online / 90 menit)</td><td>399K</td></tr>
-
-              <tr><td>Konseling Pasangan (Offline / 3 sesi)</td><td>699K</td></tr>
-              <tr><td>Konseling Pasangan (Online / 3 sesi)</td><td>599K</td></tr>
-
-              <tr><td>Konseling Pra Nikah & Assessment (Offline / 3 sesi)</td><td>899K</td></tr>
-              <tr><td>Konseling Pra Nikah & Assessment (Online / 3 sesi)</td><td>799K</td></tr>
-
-              <tr><td>Psikoterapi (Offline / 60 menit)</td><td>275K</td></tr>
-              <tr><td>Psikoterapi (Online / 60 menit)</td><td>250K</td></tr>
-              <tr><td>Bundling Psikoterapi (Offline / 4 sesi)</td><td>1000K</td></tr>
-              <tr><td>Bundling Psikoterapi (Online / 4 sesi)</td><td>800K</td></tr>
-            </tbody>
-          </table>
-          <div class="note">
-            <b>Catatan:</b> penambahan waktu dikenakan tarif <b>75K / 15 menit</b>.
+          <div class="card svc">
+            <div class="tag">AK</div>
+            <h3>Asesmen Klinis</h3>
+            <p>Asesmen psikologis untuk pemetaan kondisi, kebutuhan, dan rekomendasi langkah lanjut.</p>
+            <ul>
+              <li>Asesmen Kecerdasan</li>
+              <li>Asesmen Kesiapan Belajar</li>
+              <li>Asesmen Kesehatan Mental</li>
+              <li>Asesmen Kepribadian</li>
+              <li>Asesmen Pengembangan Karir</li>
+              <li>Asesmen Klinis</li>
+            </ul>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="pricing-group">
-          <div class="pricing-head">
-            <h3>Asesmen Anak, Remaja & Dewasa</h3>
-            <span>Setiap asesmen mendapatkan laporan hasil pemeriksaan psikologis</span>
+    <!-- (8) bundling terapi dihapus: tidak ada -->
+
+    <!-- KLINIK / GALERI -->
+    <section id="klinik">
+      <div class="container">
+        <h2 class="section-title">Suasana Klinik</h2>
+        <p class="section-sub">
+          Ruang konsultasi yang nyaman, area terapi anak, dan fasilitas yang ramah keluarga.
+        </p>
+
+        <div class="gallery">
+          <div class="big">
+            <!-- FIX: nama file sesuai repo -->
+            <img src="assetsclinic-1.jpg" alt="Area klinik Calthera" />
           </div>
-          <table>
-            <thead>
-              <tr><th>Layanan</th><th style="text-align:right">Harga</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><b>Anak & Remaja</b> — Kecerdasan</td><td>200K</td></tr>
-              <tr><td><b>Anak & Remaja</b> — Kesiapan Belajar</td><td>350K</td></tr>
-              <tr><td><b>Anak & Remaja</b> — Psikotes Lengkap (Kecerdasan, Minat Bakat & Penjurusan)</td><td>400K</td></tr>
-              <tr><td><b>Anak & Remaja</b> — Asesmen Klinis</td><td>300K</td></tr>
-
-              <tr><td><b>Dewasa</b> — Kesehatan Mental</td><td>150K</td></tr>
-              <tr><td><b>Dewasa</b> — Kecerdasan</td><td>275K</td></tr>
-              <tr><td><b>Dewasa</b> — Kepribadian</td><td>275K</td></tr>
-              <tr><td><b>Dewasa</b> — Pengembangan Karir</td><td>350K</td></tr>
-            </tbody>
-          </table>
-          <div class="note">
-            <span class="tiny">Butuh format laporan khusus untuk sekolah/rujukan? Admin bisa bantu menyesuaikan kebutuhan.</span>
+          <div class="small">
+            <img src="assetsclinic-2.jpg" alt="Ruang konsultasi Calthera" />
+            <img src="assetstherapy-room.jpeg" alt="Area terapi anak Calthera" />
           </div>
         </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- KLINIK / GALLERY -->
-  <section id="klinik">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Suasana Klinik</h2>
-          <p>Beberapa area di Calthera: ruang tunggu, ruang psikolog, ruang terapi, dan fasilitas pendukung.</p>
-        </div>
-      </div>
+    <!-- KONTAK -->
+    <section id="kontak">
+      <div class="container">
+        <h2 class="section-title">Kontak & Lokasi</h2>
+        <!-- (10) hilangkan kalimat intro panjang: dibuat ringkas -->
+        <p class="section-sub">
+          Silakan hubungi admin untuk tanya jadwal, ketersediaan layanan, dan informasi lainnya.
+        </p>
 
-      <div class="gallery" aria-label="Galeri foto klinik">
-        <div class="g g1"><img src="assets/clinic-2.jpg" alt="Area klinik Calthera" /></div>
-        <div class="g g2"><img src="assets/clinic-psy-1.jpg" alt="Ruang psikolog Calthera" /></div>
-        <div class="g g3"><img src="assets/clinic-3.jpg" alt="Ruang anak Calthera" /></div>
-        <div class="g g4"><img src="assets/therapy-room.jpg" alt="Ruang terapi Calthera" /></div>
-        <div class="g g5"><img src="assets/clinic-4.jpg" alt="Area klinik Calthera" /></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- KONTAK -->
-  <section id="kontak">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Kontak & Lokasi</h2>
-          <p>Langsung klik WhatsApp untuk tanya jadwal. Kamu juga bisa lihat lokasi di Google Maps.</p>
-        </div>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Chat WhatsApp</a>
-          <a class="btn btn-ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-box">
-          <h3>Info Klinik</h3>
-          <ul class="list">
-            <li class="li">
-              <div class="icon" style="width:38px;height:38px;border-radius:14px;margin:0;">⏰</div>
+        <div class="contact-grid">
+          <div class="card info">
+            <div class="info-card">
+              <div class="ico">⏰</div>
               <div>
                 <b>Jam Operasional</b>
                 <span>Senin–Sabtu · 09:00–17:00</span>
               </div>
-            </li>
-            <li class="li">
-              <div class="icon orange" style="width:38px;height:38px;border-radius:14px;margin:0;">📍</div>
+            </div>
+
+            <div class="info-card">
+              <div class="ico">📍</div>
               <div>
                 <b>Alamat</b>
                 <span>Jl. Belimbing No.100H, Wonorejo, Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28122</span>
               </div>
-            </li>
-            <li class="li">
-              <div class="icon cream" style="width:38px;height:38px;border-radius:14px;margin:0;">🗺️</div>
+            </div>
+
+            <div class="info-card">
+              <div class="ico">🗺️</div>
               <div>
                 <b>Google Maps</b>
-                <span><a href="https://www.google.com/maps?rlz=1C1GCEU_enID1184ID1184&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQIxgnMgwIAhAjGCcYgAQYigUyDggDEC4YChgLGLEDGIAEMhEIBBAuGAoYCxiDARixAxiABDIUCAUQLhgKGAsYrwEYxwEYgAQYjgUyBggGEEUYPDIGCAcQRRg80gEIMjI0OWowajSoAgCwAgHxBScvaGJqvLfX8QUnL2hiary31w&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KYkF5Gycr9UxMe-Y3oOBpBwX&daddr=Jl.+Belimbing+No.100H,+Wonorejo,+Kec.+Marpoyan+Damai,+Kota+Pekanbaru,+Riau+28122" target="_blank" rel="noopener"><b>Buka petunjuk arah</b></a></span>
+                <span><a href="https://www.google.com/maps?rlz=1C1GCEU_enID1184ID1184&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQIxgnMgwIAhAjGCcYgAQYigUyDggDEC4YChgLGLEDGIAEMhEIBBAuGAoYCxiDARixAxiABDIUCAUQLhgKGAsYrwEYxwEYgAQYjgUyBggGEEUYPDIGCAcQRRg80gEIMjI0OWowajSoAgCwAgHxBScvaGJqvLfX8QUnL2hiary31w&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KYkF5Gycr9UxMe-Y3oOBpBwX&daddr=Jl.+Belimbing+No.100H,+Wonorejo,+Kec.+Marpoyan+Damai,+Kota+Pekanbaru,+Riau+28122"
+                  target="_blank" rel="noopener"><u>Buka petunjuk arah</u></a></span>
               </div>
-            </li>
-          </ul>
+            </div>
 
-          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn btn-primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Booking via WhatsApp</a>
-            <a class="btn btn-orange" href="#harga">Lihat Harga</a>
+            <!-- (11) hilangkan button set atas map: done (nggak ada) -->
+            <!-- (12) ganti jadi “Chat WhatsApp”, “Instagram” -->
+            <div class="cta" style="margin-top:10px">
+              <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Chat WhatsApp</a>
+              <a class="btn" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
+            </div>
+
+            <!-- (13) catatan IG widget dihapus: tidak ada -->
           </div>
 
-          <p class="tiny" style="margin-top:12px">
-            Catatan IG: untuk “menarik feed IG otomatis” biasanya butuh widget pihak ketiga (mis. Elfsight/SnapWidget) atau API.  
-            Untuk versi static ini, paling aman: tombol ke Instagram + section galeri foto klinik (sudah ada).
-          </p>
-        </div>
-
-        <div class="contact-box">
-          <h3>Peta Lokasi</h3>
-          <iframe
-            title="Peta Calthera"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Jl.%20Belimbing%20No.100H%20Pekanbaru&output=embed">
-          </iframe>
+          <div class="map" aria-label="Peta lokasi">
+            <!-- Embed aman untuk static: pakai query -->
+            <iframe
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Jl.%20Belimbing%20No.%20100H,%20Pekanbaru&output=embed">
+            </iframe>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <div class="container">
-      <div class="foot">
-        <div class="brand" style="gap:10px">
-          <div class="logo-wrap" style="width:38px;height:38px;border-radius:14px">
-            <img src="assets/logo.svg" alt="Logo Calthera" />
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div class="left">
+            <img src="assetslogo.svg" alt="Logo Calthera" />
+            <div>
+              <div><b>Calthera</b></div>
+              <div style="color:rgba(15,23,42,.65)">Klinik Psikologi & Tumbuh Kembang Anak</div>
+            </div>
           </div>
-          <div class="name">
-            <strong>Calthera</strong>
-            <span>calthera.id · Pekanbaru</span>
-          </div>
+          <div>© <span id="y"></span> Calthera. All rights reserved.</div>
         </div>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn btn-ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
-          <a class="btn btn-primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-
-        <small>© <span id="y"></span> Calthera. All rights reserved.</small>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </main>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
