@@ -621,5 +621,46 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+
+<script>
+  (function () {
+    function isWhatsAppLink(a) {
+      const href = (a.getAttribute('href') || '').toLowerCase();
+      return href.includes('wa.me/') || href.includes('api.whatsapp.com/');
+    }
+
+    function pickLabel(a) {
+      // label biar kebaca di Events Manager
+      const text = (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60);
+      const href = a.getAttribute('href') || '';
+      return text || href;
+    }
+
+    function trackWhatsAppClick(a) {
+      if (typeof fbq !== 'function') return;
+
+      // Pilih salah satu: Lead atau Contact
+      fbq('track', 'Lead', {
+        content_name: 'WhatsApp Click',
+        button_label: pickLabel(a),
+        link_url: a.getAttribute('href') || ''
+      });
+
+      // Alternatif (kalau kamu lebih suka Contact):
+      // fbq('track', 'Contact', { ... });
+    }
+
+    // Event delegation: aman untuk tombol yang banyak / dinamis
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest && e.target.closest('a');
+      if (!a) return;
+      if (!isWhatsAppLink(a)) return;
+
+      trackWhatsAppClick(a);
+    }, true);
+  })();
+</script>
+
+  
 </body>
 </html>
