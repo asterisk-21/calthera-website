@@ -62,21 +62,19 @@
       min-width: 220px;
     }
     .brand .logo{
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: rgba(246,240,235,.9);
-      box-shadow: 0 10px 22px rgba(15,23,42,.08);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      flex: 0 0 auto;
-    }
-    .brand .logo img{
-      width: 34px;
-      height: 34px;
-      object-fit:contain;
-    }
+  background:none;
+  box-shadow:none;
+  width:auto;
+  height:auto;
+  padding:0;
+}
+
+.brand .logo img{
+  height:58px;     /* Atur tinggi logo */
+  width:auto;      /* Biar mengikuti rasio */
+  object-fit:contain;
+  display:block;
+}
     .brand .text{line-height: 1.1;}
     .brand .text b{
       display:block;
