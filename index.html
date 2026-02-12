@@ -126,7 +126,7 @@
       border-color: rgba(255,181,112,.45);
     }
 
-    /* HERO */
+    /* HERO (integrated illustration background, NO picture frame) */
     .hero{
       padding: 26px 0 10px;
     }
@@ -140,31 +140,40 @@
       box-shadow: var(--shadow);
       overflow:hidden;
     }
-    /* illustration as background (no border / no box) */
+
+    /* illustration as integrated background (no box/border) */
     .hero-card::after{
       content:"";
       position:absolute;
       inset: 0;
       background-image: url("assetshero-illustration.png");
       background-repeat:no-repeat;
-      background-position: right 40px center;
-      background-size: min(520px, 46vw);
+      background-position: right 36px bottom 18px;
+      background-size: min(760px, 58vw);
       opacity: 1;
       pointer-events:none;
-      mix-blend-mode: normal;
       filter: saturate(1.02);
     }
+
     .hero-inner{
       position: relative;
       z-index: 1;
-      padding: 42px 40px 36px;
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 24px;
-      align-items:center;
+      padding: 44px 44px 40px;
+      display:block;               /* remove 2-column grid */
       min-height: 360px;
     }
-    .hero-left{max-width: 640px}
+
+    /* readable text block but still "integrated" */
+    .hero-left{
+      max-width: 640px;
+      padding: 26px 26px 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 18px 45px rgba(10, 25, 20, .08);
+    }
+
     .hero h1{
       margin: 0 0 12px;
       font-size: clamp(34px, 4.2vw, 54px);
@@ -185,20 +194,9 @@
       align-items:center;
       margin-top: 8px;
     }
-    .hours{
-      margin-top: 14px;
-      display:inline-flex;
-      align-items:flex-start;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.9);
-      box-shadow: var(--shadow-soft);
-      color: var(--muted);
-      width: fit-content;
-    }
-    .hours b{display:block; color: var(--ink); font-size: 13px; margin-bottom: 3px}
-    .hours span{display:block; font-size: 13px}
+
+    /* REMOVE hours mini card completely */
+    .hours{display:none !important}
 
     /* focus line (no box, centered) */
     .focus{
@@ -209,7 +207,7 @@
       line-height: 1.7;
     }
 
-    /* 3 big service highlight cards */
+    /* 3 big service highlight cards (smooth, no visible border) */
     .pill-cards{
       padding: 14px 0 26px;
     }
@@ -223,7 +221,7 @@
       padding: 18px 18px 16px;
       box-shadow: var(--shadow-soft);
       background: rgba(255,255,255,.86);
-      border: 1px solid rgba(15,23,42,.06);
+      border: none; /* no border */
       transition: transform .15s ease, box-shadow .15s ease;
       min-height: 132px;
     }
@@ -239,9 +237,9 @@
       font-size: 13.5px;
       line-height: 1.6;
     }
-    .pill.tk{background: rgba(136,171,142,.14); border-color: rgba(136,171,142,.28)}
-    .pill.kp{background: rgba(255,181,112,.18); border-color: rgba(255,181,112,.35)}
-    .pill.ak{background: rgba(246,240,235,.95); border-color: rgba(15,23,42,.06)}
+    .pill.tk{background: rgba(136,171,142,.14)}
+    .pill.kp{background: rgba(255,181,112,.18)}
+    .pill.ak{background: rgba(246,240,235,.95)}
 
     /* sections */
     section{
@@ -279,7 +277,7 @@
       padding: 18px 18px 16px;
       background: rgba(255,255,255,.88);
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(15,23,42,.06);
+      border: none; /* smooth, no border */
     }
     .svc-card header{
       display:flex;
@@ -316,7 +314,7 @@
       background: rgba(255,255,255,.88);
       box-shadow: var(--shadow-soft);
       overflow:hidden;
-      border: 1px solid rgba(15,23,42,.06);
+      border: none; /* smooth, no border */
     }
     .gcard .ph{
       aspect-ratio: 4 / 3;
@@ -353,7 +351,7 @@
       border-radius: var(--radius);
       background: rgba(255,255,255,.88);
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(15,23,42,.06);
+      border: none; /* smooth, no border */
       padding: 18px;
     }
     .info-row{
@@ -375,7 +373,7 @@
     .map{
       border-radius: var(--radius);
       overflow:hidden;
-      border: 1px solid rgba(15,23,42,.06);
+      border: none; /* smooth, no border */
       box-shadow: var(--shadow-soft);
       background: rgba(246,240,235,.8);
       min-height: 360px;
@@ -397,7 +395,6 @@
     .foot .mini{
       display:flex;
       align-items:center;
-      confirm: none;
       gap: 10px;
     }
     .foot .mini img{
@@ -410,17 +407,18 @@
     /* responsive */
     @media (max-width: 980px){
       .hero-inner{
-        grid-template-columns: 1fr;
+        padding: 30px 18px 280px; /* room for illustration at bottom */
         min-height: unset;
-        padding: 34px 22px 26px;
       }
       .hero-card::after{
-        background-position: center 10px;
-        background-size: min(520px, 78vw);
-        opacity: .95;
+        background-position: center bottom 10px;
+        background-size: 92vw auto;
+        opacity: .98;
         filter: saturate(1.02) contrast(1.02);
       }
-      .hero-left{padding-top: 240px} /* make room for illustration on mobile */
+      .hero-left{
+        max-width: 100%;
+      }
       .pill-grid, .svc-grid, .gallery, .contact-grid{
         grid-template-columns: 1fr;
       }
@@ -470,16 +468,8 @@
                 <a class="btn" href="#layanan">Lihat Layanan</a>
               </div>
 
-              <div class="hours">
-                <div>
-                  <b>Senin–Sabtu</b>
-                  <span>09:00–17:00</span>
-                </div>
-              </div>
+              <!-- hours REMOVED -->
             </div>
-
-            <!-- right column intentionally empty, illustration is background -->
-            <div aria-hidden="true"></div>
           </div>
         </div>
 
