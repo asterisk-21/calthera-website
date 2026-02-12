@@ -7,11 +7,12 @@
   <meta name="description" content="Calthera adalah klinik psikologi & tumbuh kembang anak di Pekanbaru. Screening, terapi anak, konseling, asesmen psikologis, dan psikoterapi." />
   <style>
     :root{
-      --brand-1:#88ab8e;
-      --brand-2:#ffb570;
-      --brand-3:#f6f0eb;
+      --brand-1:#88ab8e; /* green */
+      --brand-2:#ffb570; /* orange */
+      --brand-3:#f6f0eb; /* cream */
       --ink:#0f172a;
       --muted:#475569;
+      --card:#ffffff;
       --shadow: 0 18px 40px rgba(15, 23, 42, .08);
       --shadow-soft: 0 10px 24px rgba(15, 23, 42, .06);
       --radius: 22px;
@@ -123,62 +124,68 @@
       border-color: rgba(255,181,112,.45);
     }
 
-    /* HERO */
-    .hero{ padding: 26px 0 10px; }
-
-    /*
-      IMPORTANT: make illustration full-bleed to screen width (kotak hijau #3),
-      while text stays inside container.
-    */
+    /* HERO (FULL-BLEED, NO GAP AFTER HEADER) */
+    .hero{
+      padding: 0; /* <— no “bocor” gap */
+    }
     .hero-card{
       position: relative;
-      border-radius: 0;
-      background: transparent;
-      box-shadow: none;
-      overflow: visible;
+      width: 100%;
+      border-radius: 0;          /* full-bleed */
+      box-shadow: none;          /* smooth */
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(246,240,235,.45), rgba(255,255,255,.70));
     }
 
-    /* Full-bleed background layer */
+    /* illustration as FULL background (edge-to-edge, taller) */
     .hero-card::after{
       content:"";
       position:absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100vw;          /* <-- full width of viewport */
-      height: 100%;
-      min-height: 420px;
+      inset: 0;
       background-image: url("assetshero-illustration.png");
       background-repeat:no-repeat;
-      background-position: center right;  /* push scene to the right side nicely */
-      background-size: cover;             /* <-- fills full width */
-      pointer-events:none;
+      background-position: center right;
+      background-size: cover;     /* <— full width like contoh */
       opacity: 1;
+      pointer-events:none;
       filter: saturate(1.02);
+      transform: scale(1.02);     /* tiny scale to avoid 1px edges on some browsers */
+    }
+
+    /* readability overlay (left side brighter so text clear) */
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset: 0;
+      background:
+        radial-gradient(900px 520px at 18% 40%, rgba(255,255,255,.95), rgba(255,255,255,.65) 45%, rgba(255,255,255,0) 75%),
+        linear-gradient(90deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,.55) 42%, rgba(255,255,255,0) 70%);
+      pointer-events:none;
       z-index: 0;
     }
 
     .hero-inner{
       position: relative;
       z-index: 1;
-      padding: 26px 0 10px;
-      min-height: 420px;
-      display:flex;
-      align-items:center;
+      padding: 42px 0 38px;
     }
 
-    /*
-      IMPORTANT: add "frame" (kotak merah #1) so text is not disturbed by image.
-      This is a soft glass/white panel.
-    */
-    .hero-left{
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 24px;
+      align-items:center;
+      min-height: 520px; /* <— lebih panjang ke bawah */
+    }
+
+    /* TEXT FRAME (box untuk area tulisan saja) */
+    .hero-panel{
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow);
+      padding: 30px 30px 22px;
       max-width: 640px;
-      padding: 28px 28px 22px;
-      border-radius: 24px;
-      background: rgba(255,255,255,.78);
-      box-shadow: 0 16px 34px rgba(15,23,42,.10);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(6px);
     }
 
     .hero h1{
@@ -202,10 +209,7 @@
       margin-top: 8px;
     }
 
-    /* remove hours */
-    .hours{display:none !important}
-
-    /* focus line */
+    /* focus line (no box, centered) */
     .focus{
       text-align:center;
       padding: 18px 0 8px;
@@ -214,8 +218,10 @@
       line-height: 1.7;
     }
 
-    /* 3 highlight cards */
-    .pill-cards{padding: 14px 0 26px;}
+    /* 3 big service highlight cards */
+    .pill-cards{
+      padding: 14px 0 26px;
+    }
     .pill-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -226,18 +232,28 @@
       padding: 18px 18px 16px;
       box-shadow: var(--shadow-soft);
       background: rgba(255,255,255,.86);
-      border: none;
+      border: 1px solid rgba(15,23,42,.06);
       transition: transform .15s ease, box-shadow .15s ease;
       min-height: 132px;
     }
     .pill:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(15,23,42,.10)}
-    .pill h3{margin: 0 0 6px; font-size: 16px; letter-spacing: -0.01em;}
-    .pill p{margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.6;}
-    .pill.tk{background: rgba(136,171,142,.14)}
-    .pill.kp{background: rgba(255,181,112,.18)}
-    .pill.ak{background: rgba(246,240,235,.95)}
+    .pill h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .pill p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .pill.tk{background: rgba(136,171,142,.14); border-color: rgba(136,171,142,.22)}
+    .pill.kp{background: rgba(255,181,112,.18); border-color: rgba(255,181,112,.28)}
+    .pill.ak{background: rgba(246,240,235,.95); border-color: rgba(15,23,42,.05)}
 
-    section{padding: 38px 0;}
+    /* sections */
+    section{ padding: 38px 0; }
     .section-title{
       display:flex;
       align-items:flex-end;
@@ -245,7 +261,11 @@
       gap: 14px;
       margin-bottom: 14px;
     }
-    .section-title h2{margin:0; font-size: 26px; letter-spacing: -0.02em;}
+    .section-title h2{
+      margin:0;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+    }
     .section-title p{
       margin: 0;
       color: var(--muted);
@@ -254,6 +274,7 @@
       max-width: 62ch;
     }
 
+    /* service lists (3 columns with bullets) */
     .svc-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -265,7 +286,7 @@
       padding: 18px 18px 16px;
       background: rgba(255,255,255,.88);
       box-shadow: var(--shadow-soft);
-      border: none;
+      border: 1px solid rgba(15,23,42,.06);
     }
     .svc-card header{
       display:flex;
@@ -274,8 +295,14 @@
       gap: 10px;
       margin-bottom: 10px;
     }
-    .svc-card header b{font-size: 16px; letter-spacing: -0.01em;}
-    .svc-card small{color: var(--muted); font-size: 13px;}
+    .svc-card header b{
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .svc-card small{
+      color: var(--muted);
+      font-size: 13px;
+    }
     .svc-card ul{
       margin: 10px 0 0;
       padding: 0 0 0 18px;
@@ -284,6 +311,7 @@
       font-size: 14px;
     }
 
+    /* gallery */
     .gallery{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -295,22 +323,32 @@
       background: rgba(255,255,255,.88);
       box-shadow: var(--shadow-soft);
       overflow:hidden;
-      border: none;
+      border: 1px solid rgba(15,23,42,.06);
     }
     .gcard .ph{
       aspect-ratio: 4 / 3;
       background: rgba(246,240,235,.8);
       overflow:hidden;
     }
-    .gcard img{width: 100%; height: 100%; object-fit: cover;}
+    .gcard img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .gcard .cap{
       padding: 12px 14px 13px;
       color: var(--muted);
       font-size: 13.5px;
       line-height: 1.5;
     }
-    .gcard .cap b{display:block; color: var(--ink); font-size: 14px; margin-bottom: 3px;}
+    .gcard .cap b{
+      display:block;
+      color: var(--ink);
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
 
+    /* contact */
     .contact-grid{
       display:grid;
       grid-template-columns: 1fr 1.2fr;
@@ -322,7 +360,7 @@
       border-radius: var(--radius);
       background: rgba(255,255,255,.88);
       box-shadow: var(--shadow-soft);
-      border: none;
+      border: 1px solid rgba(15,23,42,.06);
       padding: 18px;
     }
     .info-row{
@@ -344,7 +382,7 @@
     .map{
       border-radius: var(--radius);
       overflow:hidden;
-      border: none;
+      border: 1px solid rgba(15,23,42,.06);
       box-shadow: var(--shadow-soft);
       background: rgba(246,240,235,.8);
       min-height: 360px;
@@ -375,27 +413,28 @@
       opacity: .95;
     }
 
+    /* responsive */
     @media (max-width: 980px){
-      .hero-inner{
-        padding: 18px 0 320px;
-        min-height: unset;
+      .hero-inner{ padding: 26px 0 22px; }
+      .hero-grid{
+        grid-template-columns: 1fr;
+        min-height: 620px; /* still tall */
       }
       .hero-card::after{
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100vw;
-        background-position: center bottom;
+        background-position: center;
         background-size: cover;
+        transform: scale(1.02);
       }
-      .hero-left{
-        padding: 22px 20px 18px;
-        border-radius: 22px;
-        background: rgba(255,255,255,.86);
-        box-shadow: 0 14px 28px rgba(15,23,42,.10);
+      .hero-card::before{
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.60) 45%, rgba(255,255,255,0) 80%);
       }
-      .pill-grid, .svc-grid, .gallery, .contact-grid{
-        grid-template-columns: 1fr;
+      .hero-panel{
+        padding: 22px 18px 16px;
+        margin-top: 180px; /* makes room for illustration */
+        max-width: unset;
       }
+      .pill-grid, .svc-grid, .gallery, .contact-grid{ grid-template-columns: 1fr; }
       .nav-inner{padding: 12px 0}
       .brand{min-width: unset}
     }
@@ -426,25 +465,34 @@
 
   <main id="top">
     <div class="hero">
-      <div class="container">
-        <div class="hero-card">
+      <div class="hero-card">
+        <div class="container">
           <div class="hero-inner">
-            <div class="hero-left">
-              <h1>Dampingi Tumbuh Kembang Anak Dengan Profesional Dan Terarah.</h1>
-              <p>
-                Calthera adalah klinik psikologi &amp; tumbuh kembang anak di Pekanbaru.
-                Kami melayani <b>screening</b>, <b>terapi anak</b>, <b>konseling</b>, <b>asesmen psikologis</b>, dan <b>psikoterapi</b>.
-              </p>
+            <div class="hero-grid">
+              <div>
+                <div class="hero-panel">
+                  <h1>Dampingi Tumbuh Kembang Anak Dengan Profesional Dan Terarah.</h1>
+                  <p>
+                    Calthera adalah klinik psikologi &amp; tumbuh kembang anak di Pekanbaru.
+                    Kami melayani <b>screening</b>, <b>terapi anak</b>, <b>konseling</b>, <b>asesmen psikologis</b>, dan <b>psikoterapi</b>.
+                  </p>
 
-              <div class="cta">
-                <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
-                <a class="btn secondary" href="#kontak">Lihat Lokasi &amp; Jam Buka</a>
-                <a class="btn" href="#layanan">Lihat Layanan</a>
+                  <div class="cta">
+                    <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
+                    <a class="btn secondary" href="#kontak">Lihat Lokasi &amp; Jam Buka</a>
+                    <a class="btn" href="#layanan">Lihat Layanan</a>
+                  </div>
+                </div>
               </div>
+
+              <!-- right column intentionally empty, illustration is full background -->
+              <div aria-hidden="true"></div>
             </div>
           </div>
         </div>
+      </div>
 
+      <div class="container">
         <div class="focus">
           Membantu anak &amp; keluarga memahami kebutuhan, menyusun rencana, dan menjalankan pendampingan secara konsisten — dengan komunikasi yang mudah dipahami.
         </div>
@@ -465,7 +513,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
