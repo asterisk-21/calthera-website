@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calthera Clinic | Klinik Psikologi & Tumbuh Kembang</title>
+  <meta name="description" content="Calthera Clinic membantu tumbuh kembang anak melalui screening perkembangan, terapi, dan konseling psikologi di Pekanbaru." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+
+    header {
+      background: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+    }
+
+    .btn-primary {
+      background: #0f172a;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .btn-outline {
+      border: 1px solid #0f172a;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      padding: 60px 40px;
+      background: white;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .card {
+      padding: 24px;
+      border-radius: 16px;
+      background: #f1f5f9;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input, textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+    }
+
+    footer {
+      padding: 40px;
+      text-align: center;
+      background: #0f172a;
+      color: white;
+      margin-top: 60px;
+    }
+
+    .wa-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <strong>Calthera Clinic</strong>
+  <div>
+    <a href="#kontak" class="btn-outline">Kontak</a>
+    <a href="https://wa.me/message/KGPDUV4JPNXBN1" class="btn-primary">Booking</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Dampingi tumbuh kembang anak dengan tenang dan terarah.</h1>
+  <p>Klinik Psikologi & Tumbuh Kembang Anak di Pekanbaru.</p>
+  <br>
+  <a href="#kontak" class="btn-primary">Konsultasi Sekarang</a>
+</section>
+
+<section class="section">
+  <h2 style="text-align:center;">Layanan Kami</h2>
+  <div class="services">
+    <div class="card">
+      <h3>Screening Tumbuh Kembang</h3>
+      <p>Pemetaan perkembangan anak dan rekomendasi tindak lanjut.</p>
+    </div>
+    <div class="card">
+      <h3>Terapi Anak</h3>
+      <p>Terapi wicara, okupasi, perilaku, dan remedial.</p>
+    </div>
+    <div class="card">
+      <h3>Konseling Psikologi</h3>
+      <p>Konseling individu, pasangan, dan keluarga.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="kontak">
+  <h2 style="text-align:center;">Tinggalkan Kontak</h2>
+  <form action="https://formspree.io/f/your-form-id" method="POST">
+    <input type="text" name="nama" placeholder="Nama Anda" required />
+    <input type="tel" name="whatsapp" placeholder="Nomor WhatsApp" required />
+    <textarea name="pesan" placeholder="Kebutuhan Anda"></textarea>
+    <button type="submit" class="btn-primary">Kirim</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 Calthera Clinic | Pekanbaru
+</footer>
+
+<a href="https://wa.me/message/KGPDUV4JPNXBN1" class="wa-float">WhatsApp</a>
+
+</body>
+</html>
