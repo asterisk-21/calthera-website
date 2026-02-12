@@ -5,371 +5,447 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Calthera — Klinik Psikologi & Tumbuh Kembang Anak</title>
   <meta name="description" content="Calthera adalah klinik psikologi & tumbuh kembang anak di Pekanbaru. Screening, terapi anak, konseling, asesmen psikologis, dan psikoterapi." />
-
   <style>
     :root{
-      --brand-green:#88ab8e;
-      --brand-orange:#ffb570;
-      --brand-cream:#f6f0eb;
-
-      --text:#0f172a;
+      --brand-1:#88ab8e; /* green */
+      --brand-2:#ffb570; /* orange */
+      --brand-3:#f6f0eb; /* cream */
+      --ink:#0f172a;
       --muted:#475569;
-      --line:#e5e7eb;
       --card:#ffffff;
-
-      --radius:22px;
-      --shadow:0 18px 60px rgba(15, 23, 42, .10);
-      --shadow-soft:0 10px 28px rgba(15, 23, 42, .08);
-
-      --container:1120px;
+      --shadow: 0 18px 40px rgba(15, 23, 42, .08);
+      --shadow-soft: 0 10px 24px rgba(15, 23, 42, .06);
+      --radius: 22px;
+      --radius-lg: 28px;
+      --container: 1120px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
       background:
-        radial-gradient(1200px 700px at 10% 10%, rgba(255,181,112,.26), transparent 55%),
-        radial-gradient(1200px 700px at 90% 0%, rgba(136,171,142,.25), transparent 55%),
-        #fff;
-      line-height:1.45;
+        radial-gradient(1200px 600px at 15% 15%, rgba(255,181,112,.20), transparent 60%),
+        radial-gradient(900px 520px at 85% 10%, rgba(136,171,142,.22), transparent 55%),
+        linear-gradient(180deg, #fff, #fff);
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    .container{
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
     }
 
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--container); margin:0 auto; padding:0 20px}
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:saturate(160%) blur(10px);
-      background:rgba(255,255,255,.75);
-      border-bottom:1px solid rgba(229,231,235,.65);
-    }
+    /* NAV */
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.72);
+      border-bottom: 1px solid rgba(15,23,42,.06);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 16px;
     }
     .brand{
-      display:flex; align-items:center; gap:12px; min-width:220px;
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 220px;
     }
     .brand .logo{
-      width:44px; height:44px; border-radius:14px;
-      display:grid; place-items:center;
-      background:rgba(246,240,235,.85);
-      border:1px solid rgba(229,231,235,.9);
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(246,240,235,.9);
+      box-shadow: 0 10px 22px rgba(15,23,42,.08);
+      display:grid;
+      place-items:center;
       overflow:hidden;
+      flex: 0 0 auto;
     }
-    .brand .logo img{width:30px; height:30px; object-fit:contain}
-    .brand .t{
-      display:flex; flex-direction:column; gap:2px;
-      line-height:1.15;
+    .brand .logo img{
+      width: 34px;
+      height: 34px;
+      object-fit:contain;
     }
-    .brand .t strong{font-size:15px}
-    .brand .t span{font-size:12px; color:var(--muted)}
+    .brand .text{
+      line-height: 1.1;
+    }
+    .brand .text b{
+      display:block;
+      font-size: 15px;
+      letter-spacing: .2px;
+    }
+    .brand .text span{
+      display:block;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
 
-    .navlinks{display:flex; gap:18px; align-items:center; flex-wrap:wrap; justify-content:center}
-    .navlinks a{
-      font-size:14px; color:rgba(15,23,42,.85);
-      padding:8px 10px; border-radius:12px;
-    }
-    .navlinks a:hover{background:rgba(246,240,235,.7)}
-
-    .cta{
-      display:flex; gap:10px; align-items:center; justify-content:flex-end; min-width:220px;
-    }
+    /* BUTTONS */
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:14px;
-      border:1px solid rgba(229,231,235,.95);
-      background:#fff;
-      box-shadow:0 8px 20px rgba(15,23,42,.06);
-      transition:transform .15s ease, box-shadow .15s ease;
-      white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      border: 1px solid rgba(15,23,42,.08);
+      background: #fff;
+      box-shadow: 0 10px 20px rgba(15,23,42,.06);
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      white-space: nowrap;
     }
-    .btn:hover{transform:translateY(-1px); box-shadow:0 14px 30px rgba(15,23,42,.10)}
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 16px 28px rgba(15,23,42,.10)}
+    .btn:active{transform: translateY(0px)}
     .btn.primary{
-      background:var(--brand-green);
-      border-color:rgba(136,171,142,.55);
-      color:#fff;
+      background: rgba(136,171,142,.18);
+      border-color: rgba(136,171,142,.35);
     }
-    .btn.ghost{
-      background:#fff;
+    .btn.secondary{
+      background: rgba(255,181,112,.22);
+      border-color: rgba(255,181,112,.45);
     }
-
-    /* Sections */
-    section{padding:56px 0}
-    .section-title{
-      font-size:32px; margin:0 0 10px;
-      letter-spacing:-.02em;
-    }
-    .section-sub{margin:0; color:var(--muted); max-width:70ch}
 
     /* HERO */
     .hero{
-      padding:34px 0 10px;
+      padding: 26px 0 10px;
     }
-    .hero-wrap{
+    .hero-card{
+      position: relative;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(900px 420px at 20% 0%, rgba(255,181,112,.20), transparent 60%),
+        radial-gradient(900px 420px at 90% 10%, rgba(136,171,142,.22), transparent 58%),
+        linear-gradient(180deg, rgba(246,240,235,.75), rgba(255,255,255,.92));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    /* illustration as background (no border / no box) */
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset: 0;
+      background-image: url("assetshero-illustration.png");
+      background-repeat:no-repeat;
+      background-position: right 40px center;
+      background-size: min(520px, 46vw);
+      opacity: 1;
+      pointer-events:none;
+      mix-blend-mode: normal;
+      filter: saturate(1.02);
+    }
+    .hero-inner{
+      position: relative;
+      z-index: 1;
+      padding: 42px 40px 36px;
       display:grid;
-      grid-template-columns: 1.25fr .95fr;
-      gap:26px;
-      align-items:stretch;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 24px;
+      align-items:center;
+      min-height: 360px;
     }
-    .hero-left{
-      padding:34px 8px 10px;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      border:1px solid rgba(229,231,235,.95);
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.75);
-      box-shadow:0 10px 26px rgba(15,23,42,.06);
-      font-weight:700;
-      font-size:13px;
-      color:rgba(15,23,42,.75);
-      margin-bottom:14px;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:50%;
-      background:var(--brand-green);
-      box-shadow:0 0 0 5px rgba(136,171,142,.18);
-    }
+    .hero-left{max-width: 640px}
     .hero h1{
-      font-size:52px;
-      line-height:1.05;
-      letter-spacing:-.03em;
-      margin:0 0 12px;
+      margin: 0 0 12px;
+      font-size: clamp(34px, 4.2vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
     }
     .hero p{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-size:16px;
-      max-width:64ch;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 52ch;
     }
-    .hero-actions{
-      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
-      margin-top:14px;
+    .hero .cta{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items:center;
+      margin-top: 8px;
     }
-    .chips{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:18px;
+    .hours{
+      margin-top: 14px;
+      display:inline-flex;
+      align-items:flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.9);
+      box-shadow: var(--shadow-soft);
+      color: var(--muted);
+      width: fit-content;
     }
-    .chip{
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(229,231,235,.95);
-      background:rgba(255,255,255,.78);
-      box-shadow:0 10px 22px rgba(15,23,42,.06);
-      min-width:210px;
-    }
-    .chip strong{display:block; font-size:13px}
-    .chip span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
+    .hours b{display:block; color: var(--ink); font-size: 13px; margin-bottom: 3px}
+    .hours span{display:block; font-size: 13px}
 
-    /* Hero illustration panel (right) */
-    .hero-right{
-      position:relative;
-      border-radius:var(--radius);
-      background:
-        radial-gradient(900px 500px at 30% 25%, rgba(255,181,112,.22), transparent 60%),
-        radial-gradient(900px 500px at 70% 10%, rgba(136,171,142,.22), transparent 60%),
-        rgba(255,255,255,.55);
-      border:1px solid rgba(229,231,235,.7);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      min-height:360px;
-    }
-    .hero-illus{
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      padding:12px;
-    }
-    .hero-illus img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:70% center;
-      opacity:.96;
-    }
-    /* soft fade so left side stays clean */
-    .hero-right:before{
-      content:"";
-      position:absolute; inset:0;
-      background:linear-gradient(90deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.35) 45%, rgba(255,255,255,0) 75%);
-      pointer-events:none;
-    }
-
-    /* Focus area */
+    /* focus line (no box, centered) */
     .focus{
-      padding:22px 0 10px;
-    }
-    .focus-text{
       text-align:center;
-      max-width:80ch;
-      margin:0 auto 18px;
-      font-size:18px;
-      color:rgba(15,23,42,.78);
+      padding: 18px 0 8px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
     }
 
-    /* Service big cards (colored) */
-    .service-row{
+    /* 3 big service highlight cards */
+    .pill-cards{
+      padding: 14px 0 26px;
+    }
+    .pill-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:16px;
-      margin-top:18px;
+      gap: 14px;
     }
-    .svc{
-      border-radius:var(--radius);
-      padding:18px 18px 16px;
-      box-shadow:var(--shadow-soft);
-      border:1px solid rgba(229,231,235,.75);
-      min-height:150px;
+    .pill{
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(15,23,42,.06);
+      transition: transform .15s ease, box-shadow .15s ease;
+      min-height: 132px;
     }
-    .svc h3{
-      margin:0 0 8px;
-      font-size:18px;
-      letter-spacing:-.01em;
+    .pill:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(15,23,42,.10)}
+    .pill h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+      letter-spacing: -0.01em;
     }
-    .svc p{
+    .pill p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .pill.tk{background: rgba(136,171,142,.14); border-color: rgba(136,171,142,.28)}
+    .pill.kp{background: rgba(255,181,112,.18); border-color: rgba(255,181,112,.35)}
+    .pill.ak{background: rgba(246,240,235,.95); border-color: rgba(15,23,42,.06)}
+
+    /* sections */
+    section{
+      padding: 38px 0;
+    }
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .section-title h2{
       margin:0;
-      color:rgba(15,23,42,.74);
-      font-size:14px;
-      line-height:1.55;
+      font-size: 26px;
+      letter-spacing: -0.02em;
     }
-    .svc.tk{ background:linear-gradient(180deg, rgba(136,171,142,.22), rgba(255,255,255,.88)); }
-    .svc.kp{ background:linear-gradient(180deg, rgba(255,181,112,.22), rgba(255,255,255,.88)); }
-    .svc.ak{ background:linear-gradient(180deg, rgba(246,240,235,1), rgba(255,255,255,.90)); }
+    .section-title p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 62ch;
+    }
 
-    /* Layanan detail */
-    .grid-3{
+    /* service lists (3 columns with bullets) */
+    .svc-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-      margin-top:18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
     }
-    .card{
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(229,231,235,.75);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-soft);
-      padding:18px;
+    .svc-card{
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
+      background: rgba(255,255,255,.88);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(15,23,42,.06);
     }
-    .card h3{margin:0 0 10px; font-size:16px}
-    .list{margin:0; padding-left:18px; color:rgba(15,23,42,.78)}
-    .list li{margin:6px 0}
-    .muted{color:var(--muted)}
-    .small{font-size:13px}
+    .svc-card header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .svc-card header b{
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .svc-card small{
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .svc-card ul{
+      margin: 10px 0 0;
+      padding: 0 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
 
-    /* Klinik photos */
+    /* gallery */
     .gallery{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
     }
-    .ph{
-      border-radius:18px;
+    .gcard{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.88);
+      box-shadow: var(--shadow-soft);
       overflow:hidden;
-      border:1px solid rgba(229,231,235,.75);
-      box-shadow:var(--shadow-soft);
-      background:#fff;
-      aspect-ratio: 4 / 3;
+      border: 1px solid rgba(15,23,42,.06);
     }
-    .ph img{width:100%; height:100%; object-fit:cover}
+    .gcard .ph{
+      aspect-ratio: 4 / 3;
+      background: rgba(246,240,235,.8);
+      overflow:hidden;
+    }
+    .gcard img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gcard .cap{
+      padding: 12px 14px 13px;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    .gcard .cap b{
+      display:block;
+      color: var(--ink);
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
 
-    /* Kontak */
+    /* contact */
     .contact-grid{
       display:grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap:16px;
-      margin-top:18px;
-      align-items:start;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 14px;
+      margin-top: 14px;
+      align-items:stretch;
     }
-    .info-item{
-      display:flex; gap:12px;
-      padding:14px;
-      border-radius:18px;
-      border:1px solid rgba(229,231,235,.75);
-      background:rgba(255,255,255,.78);
-      box-shadow:var(--shadow-soft);
-      margin-bottom:12px;
+    .panel{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.88);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(15,23,42,.06);
+      padding: 18px;
     }
-    .badge{
-      width:40px; height:40px; border-radius:14px;
-      display:grid; place-items:center;
-      background:rgba(246,240,235,.9);
-      border:1px solid rgba(229,231,235,.85);
-      font-size:18px;
+    .info-row{
+      display:flex;
+      gap: 10px;
+      margin: 12px 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
     }
-    iframe{
-      width:100%;
-      height:360px;
-      border:0;
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-soft);
-      border:1px solid rgba(229,231,235,.75);
-      background:#fff;
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(136,171,142,.7);
+      margin-top: 6px;
+      flex: 0 0 auto;
     }
+    .map{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid rgba(15,23,42,.06);
+      box-shadow: var(--shadow-soft);
+      background: rgba(246,240,235,.8);
+      min-height: 360px;
+    }
+    iframe{border:0; width:100%; height:100%}
+
     footer{
-      padding:24px 0 34px;
-      border-top:1px solid rgba(229,231,235,.75);
-      background:rgba(255,255,255,.6);
+      padding: 26px 0 34px;
+      color: rgba(71,85,105,.9);
+      font-size: 13px;
     }
     .foot{
-      display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; align-items:center;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .foot .mini{
+      display:flex;
+      align-items:center;
+      confirm: none;
+      gap: 10px;
+    }
+    .foot .mini img{
+      width: 28px;
+      height: 28px;
+      object-fit:contain;
+      opacity: .95;
     }
 
-    /* Responsive */
+    /* responsive */
     @media (max-width: 980px){
-      .hero-wrap{grid-template-columns:1fr; }
-      .hero-right{min-height:320px}
-      .service-row{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:1fr}
-      .gallery{grid-template-columns:1fr 1fr}
-      .contact-grid{grid-template-columns:1fr}
-      .hero h1{font-size:40px}
-      .chips .chip{min-width:unset; flex:1}
-      .brand{min-width:unset}
-      .cta{min-width:unset}
-    }
-    @media (max-width: 520px){
-      .gallery{grid-template-columns:1fr}
-      .hero h1{font-size:34px}
-      .btn{width:100%}
-      .cta{display:none} /* keep header clean on very small */
-      .navlinks{justify-content:flex-end}
+      .hero-inner{
+        grid-template-columns: 1fr;
+        min-height: unset;
+        padding: 34px 22px 26px;
+      }
+      .hero-card::after{
+        background-position: center 10px;
+        background-size: min(520px, 78vw);
+        opacity: .95;
+        filter: saturate(1.02) contrast(1.02);
+      }
+      .hero-left{padding-top: 240px} /* make room for illustration on mobile */
+      .pill-grid, .svc-grid, .gallery, .contact-grid{
+        grid-template-columns: 1fr;
+      }
+      .nav-inner{padding: 12px 0}
+      .brand{min-width: unset}
     }
   </style>
 </head>
 
 <body>
-  <header>
+  <header class="nav">
     <div class="container">
-      <div class="nav">
-        <a class="brand" href="#top" aria-label="Calthera">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Calthera Home">
           <div class="logo">
-            <!-- Pastikan file ini ada: assets/logo.svg -->
-            <img src="assets/logo.svg" alt="Logo Calthera" />
+            <img src="assetslogo.svg" alt="Logo Calthera">
           </div>
-          <div class="t">
-            <strong>Calthera</strong>
+          <div class="text">
+            <b>Calthera</b>
             <span>Klinik Psikologi &amp; Tumbuh Kembang Anak</span>
           </div>
         </a>
 
-        <nav class="navlinks" aria-label="Navigasi">
-          <a href="#layanan">Layanan</a>
-          <a href="#klinik">Klinik</a>
-          <a href="#kontak">Kontak</a>
-        </nav>
-
-        <div class="cta">
-          <a class="btn ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
+        <div class="nav-actions">
+          <a class="btn" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
           <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
@@ -377,182 +453,213 @@
   </header>
 
   <main id="top">
-    <!-- HERO -->
-    <section class="hero">
+    <div class="hero">
       <div class="container">
-        <div class="hero-wrap">
-          <!-- LEFT: text (no border) -->
-          <div class="hero-left">
-            <div class="pill"><span class="dot"></span> Pendampingan profesional, hangat, dan terarah</div>
+        <div class="hero-card">
+          <div class="hero-inner">
+            <div class="hero-left">
+              <h1>Dampingi Tumbuh Kembang Anak Dengan Profesional Dan Terarah.</h1>
+              <p>
+                Calthera adalah klinik psikologi &amp; tumbuh kembang anak di Pekanbaru.
+                Kami melayani <b>screening</b>, <b>terapi anak</b>, <b>konseling</b>, <b>asesmen psikologis</b>, dan <b>psikoterapi</b>.
+              </p>
 
-            <h1>Dampingi tumbuh kembang anak dengan profesional dan terarah.</h1>
+              <div class="cta">
+                <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
+                <a class="btn secondary" href="#kontak">Lihat Lokasi &amp; Jam Buka</a>
+                <a class="btn" href="#layanan">Lihat Layanan</a>
+              </div>
 
-            <p>
-              Calthera adalah klinik psikologi &amp; tumbuh kembang anak di Pekanbaru.
-              Kami melayani <strong>screening</strong>, <strong>terapi anak</strong>, <strong>konseling</strong>, <strong>asesmen psikologis</strong>, dan <strong>psikoterapi</strong>.
-            </p>
-
-            <div class="hero-actions">
-              <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
-              <a class="btn" href="#kontak">Lihat Lokasi &amp; Jam Buka</a>
-              <a class="btn" href="#layanan">Lihat Layanan</a>
-            </div>
-
-            <div class="chips">
-              <div class="chip">
-                <strong>Senin–Sabtu</strong>
-                <span>09:00–17:00</span>
+              <div class="hours">
+                <div>
+                  <b>Senin–Sabtu</b>
+                  <span>09:00–17:00</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- RIGHT: illustration -->
-          <div class="hero-right" aria-label="Ilustrasi Calthera">
-            <div class="hero-illus">
-              <!-- Upload ilustrasi kamu ke: assetshero-illustration.png -->
-              <img src="assetshero-illustration.png" alt="Ilustrasi suasana Calthera" />
+            <!-- right column intentionally empty, illustration is background -->
+            <div aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="focus">
+          Membantu anak &amp; keluarga memahami kebutuhan, menyusun rencana, dan menjalankan pendampingan secara konsisten — dengan komunikasi yang mudah dipahami.
+        </div>
+
+        <div class="pill-cards">
+          <div class="pill-grid">
+            <div class="pill tk">
+              <h3>Tumbuh Kembang Anak</h3>
+              <p>Pendampingan perkembangan anak dari pemetaan kebutuhan, rencana terapi, hingga evaluasi progres secara berkala.</p>
+            </div>
+            <div class="pill kp">
+              <h3>Konseling &amp; Psikoterapi</h3>
+              <p>Ruang aman untuk anak, remaja, dewasa, pasangan, dan keluarga — dengan pendekatan profesional.</p>
+            </div>
+            <div class="pill ak">
+              <h3>Asesmen Klinis</h3>
+              <p>Pemeriksaan psikologis terstruktur untuk memahami kondisi, kekuatan, dan kebutuhan — sebagai dasar rekomendasi yang jelas.</p>
             </div>
           </div>
         </div>
+
       </div>
-    </section>
+    </div>
 
-    <!-- FOKUS + 3 KOTAK BESAR BERWARNA -->
-    <section class="focus">
-      <div class="container">
-        <p class="focus-text">
-          Membantu anak &amp; keluarga memahami kebutuhan, menyusun rencana, dan menjalankan pendampingan secara konsisten —
-          dengan komunikasi yang mudah dipahami.
-        </p>
-
-        <div class="service-row" aria-label="Tiga layanan utama">
-          <div class="svc tk">
-            <h3>Tumbuh Kembang Anak</h3>
-            <p>
-              Pendampingan perkembangan anak dari tahap awal: pemetaan kebutuhan, rencana terapi, dan evaluasi progres secara berkala.
-            </p>
-          </div>
-          <div class="svc kp">
-            <h3>Konseling &amp; Psikoterapi</h3>
-            <p>
-              Ruang aman untuk anak, remaja, dewasa, pasangan, dan keluarga — dengan pendekatan profesional (offline &amp; online).
-            </p>
-          </div>
-          <div class="svc ak">
-            <h3>Asesmen Klinis</h3>
-            <p>
-              Pemeriksaan psikologis terstruktur untuk memahami kondisi, kekuatan, dan kebutuhan — sebagai dasar rekomendasi yang jelas.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LAYANAN DETAIL (3 kolom list kebawah) -->
     <section id="layanan">
       <div class="container">
-        <h2 class="section-title">Layanan Calthera</h2>
-        <p class="section-sub">Dikelompokkan sesuai 3 bidang utama layanan di Calthera.</p>
+        <div class="section-title">
+          <div>
+            <h2>Layanan Calthera</h2>
+            <p>Dikelompokkan sesuai 3 bidang utama layanan di Calthera (tanpa price list).</p>
+          </div>
+        </div>
 
-        <div class="grid-3">
-          <div class="card">
-            <h3>Tumbuh Kembang Anak</h3>
-            <ul class="list">
-              <li>Screening tumbuh kembang</li>
-              <li>Screening terapi</li>
-              <li>Terapi wicara</li>
-              <li>Terapi okupasi</li>
-              <li>Terapi perilaku</li>
-              <li>Terapi sensori integrasi</li>
+        <div class="svc-grid">
+          <div class="svc-card">
+            <header>
+              <b>Tumbuh Kembang Anak</b>
+              <small>Screening &amp; Terapi</small>
+            </header>
+            <ul>
+              <li>Screening Tumbuh Kembang</li>
+              <li>Screening Terapi</li>
+              <li>Terapi Wicara</li>
+              <li>Terapi Okupasi</li>
+              <li>Terapi Perilaku</li>
+              <li>Sensori Integrasi</li>
               <li>Fisioterapi</li>
-              <li>Terapi remedial</li>
+              <li>Terapi Remedial</li>
             </ul>
           </div>
 
-          <div class="card">
-            <h3>Konseling &amp; Psikoterapi</h3>
-            <ul class="list">
-              <li>Konseling anak &amp; remaja</li>
-              <li>Konseling dewasa</li>
-              <li>Konseling pasangan</li>
-              <li>Konseling keluarga</li>
-              <li>Pra-nikah</li>
-              <li>Sesi psikoterapi (offline &amp; online)</li>
+          <div class="svc-card">
+            <header>
+              <b>Konseling &amp; Psikoterapi</b>
+              <small>Offline &amp; Online</small>
+            </header>
+            <ul>
+              <li>Konseling Anak &amp; Dewasa</li>
+              <li>Konseling Pasangan</li>
+              <li>Konseling Keluarga</li>
+              <li>Konseling Pra-Nikah &amp; Asesmen</li>
+              <li>Psikoterapi</li>
             </ul>
           </div>
 
-          <div class="card">
-            <h3>Asesmen Klinis</h3>
-            <ul class="list">
-              <li>Tes kecerdasan (anak–dewasa)</li>
-              <li>Tes kesiapan belajar</li>
-              <li>Asesmen kesehatan mental</li>
-              <li>Tes kepribadian</li>
-              <li>Asesmen pengembangan karir</li>
-              <li>Asesmen klinis</li>
+          <div class="svc-card">
+            <header>
+              <b>Asesmen Klinis</b>
+              <small>Anak–Remaja &amp; Dewasa</small>
+            </header>
+            <ul>
+              <li>Asesmen Anak &amp; Remaja: Kecerdasan</li>
+              <li>Asesmen Anak &amp; Remaja: Kesiapan Belajar</li>
+              <li>Psikotes Lengkap (Kecerdasan, Minat Bakat &amp; Penjurusan)</li>
+              <li>Asesmen Klinis</li>
+              <li>Asesmen Dewasa: Kesehatan Mental</li>
+              <li>Asesmen Dewasa: Kepribadian</li>
+              <li>Asesmen Dewasa: Pengembangan Karir</li>
             </ul>
           </div>
+        </div>
+
+        <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Chat WhatsApp</a>
+          <a class="btn" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
     </section>
 
-    <!-- KLINIK (galeri foto) -->
     <section id="klinik">
       <div class="container">
-        <h2 class="section-title">Klinik</h2>
-        <p class="section-sub">Beberapa suasana ruang di Calthera.</p>
-
-        <div class="gallery">
-          <!-- Pastikan file-file ini ada di repo sesuai nama -->
-          <div class="ph"><img src="assets/clinic-1.jpg" alt="Ruang tunggu Calthera"></div>
-          <div class="ph"><img src="assets/clinic-2.jpg" alt="Ruang konseling Calthera"></div>
-          <div class="ph"><img src="assets/clinic-3.jpg" alt="Ruang terapi anak Calthera"></div>
-          <div class="ph"><img src="assets/clinic-4.jpg" alt="Logo Calthera"></div>
-          <div class="ph"><img src="assets/clinic-psy-1.jpg" alt="Ruang psikolog Calthera"></div>
-          <div class="ph"><img src="assets/clinic-psy-2.jpg" alt="Ruang psikolog Calthera"></div>
+        <div class="section-title">
+          <div>
+            <h2>Klinik</h2>
+            <p>Beberapa suasana ruang di Calthera.</p>
+          </div>
         </div>
 
-        <p class="muted small" style="margin-top:12px;">
-          Tips: kalau ada foto yang belum kamu upload, cukup hapus salah satu item <code>&lt;div class="ph"&gt;...&lt;/div&gt;</code> di atas.
-        </p>
+        <div class="gallery">
+          <div class="gcard">
+            <div class="ph"><img src="assetsclinic-1.jpg" alt="Ruang tunggu Calthera"></div>
+            <div class="cap"><b>Ruang Tunggu</b>Nyaman, terang, dan ramah anak.</div>
+          </div>
+
+          <div class="gcard">
+            <div class="ph"><img src="assetsclinic-2.jpg" alt="Ruang konseling Calthera"></div>
+            <div class="cap"><b>Ruang Konseling</b>Privat, tenang, dan hangat.</div>
+          </div>
+
+          <div class="gcard">
+            <div class="ph"><img src="assetstherapy-room.jpeg" alt="Ruang terapi anak Calthera"></div>
+            <div class="cap"><b>Ruang Terapi Anak</b>Area terapi untuk stimulasi &amp; aktivitas.</div>
+          </div>
+
+          <div class="gcard">
+            <div class="ph"><img src="assetsclinic-3.jpg" alt="Ruang klinik Calthera"></div>
+            <div class="cap"><b>Area Klinik</b>Suasana bersih dan tertata.</div>
+          </div>
+
+          <div class="gcard">
+            <div class="ph"><img src="assetsclinic-psy-1.jpg" alt="Ruang psikolog Calthera"></div>
+            <div class="cap"><b>Ruang Psikolog</b>Ruang sesi yang nyaman dan aman.</div>
+          </div>
+
+          <div class="gcard">
+            <div class="ph"><img src="assetsclinic-psy-2.jpg" alt="Ruang psikolog Calthera (2)"></div>
+            <div class="cap"><b>Ruang Psikolog</b>Alternatif ruangan sesi lainnya.</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- KONTAK -->
     <section id="kontak">
       <div class="container">
-        <h2 class="section-title">Kontak &amp; Lokasi</h2>
-        <p class="section-sub">Chat via WhatsApp untuk tanya jadwal. Kamu juga bisa buka lokasi di Google Maps.</p>
+        <div class="section-title">
+          <div>
+            <h2>Kontak &amp; Lokasi</h2>
+            <p>Alamat, jam operasional, dan peta lokasi Calthera.</p>
+          </div>
+        </div>
 
         <div class="contact-grid">
-          <div>
-            <div class="info-item">
-              <div class="badge">⏰</div>
+          <div class="panel">
+            <div class="info-row">
+              <span class="dot"></span>
               <div>
-                <strong>Jam Operasional</strong><br/>
-                <span class="muted">Senin–Sabtu · 09:00–17:00</span>
+                <b style="display:block;color:var(--ink)">Jam Operasional</b>
+                Senin–Sabtu · 09:00–17:00
               </div>
             </div>
 
-            <div class="info-item">
-              <div class="badge">📍</div>
+            <div class="info-row">
+              <span class="dot" style="background: rgba(255,181,112,.85)"></span>
               <div>
-                <strong>Alamat</strong><br/>
-                <span class="muted">Jl. Belimbing No.100H, Wonorejo, Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28122</span>
+                <b style="display:block;color:var(--ink)">Alamat</b>
+                Jl. Belimbing No.100H, Wonorejo, Kec. Marpoyan Damai,<br>
+                Kota Pekanbaru, Riau 28122
               </div>
             </div>
 
-            <div class="hero-actions" style="margin-top:10px">
+            <div class="info-row">
+              <span class="dot" style="background: rgba(246,240,235,.95); border:1px solid rgba(15,23,42,.10)"></span>
+              <div>
+                <b style="display:block;color:var(--ink)">Tautan</b>
+                <a class="btn" style="padding:9px 12px; margin-top:8px" href="https://www.google.com/maps?rlz=1C1GCEU_enID1184ID1184&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQIxgnMgwIAhAjGCcYgAQYigUyDggDEC4YChgLGLEDGIAEMhEIBBAuGAoYCxiDARixAxiABDIUCAUQLhgKGAsYrwEYxwEYgAQYjgUyBggGEEUYPDIGCAcQRRg80gEIMjI0OWowajSoAgCwAgHxBScvaGJqvLfX8QUnL2hiary31w&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KYkF5Gycr9UxMe-Y3oOBpBwX&daddr=Jl.+Belimbing+No.100H,+Wonorejo,+Kec.+Marpoyan+Damai,+Kota+Pekanbaru,+Riau+28122"
+                   target="_blank" rel="noopener">Buka di Google Maps</a>
+              </div>
+            </div>
+
+            <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
               <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Chat WhatsApp</a>
               <a class="btn" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
-              <a class="btn" href="https://www.google.com/maps?rlz=1C1GCEU_enID1184ID1184&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQIxgnMgwIAhAjGCcYgAQYigUyDggDEC4YChgLGLEDGIAEMhEIBBAuGAoYCxiDARixAxiABDIUCAUQLhgKGAsYrwEYxwEYgAQYjgUyBggGEEUYPDIGCAcQRRg80gEIMjI0OWowajSoAgCwAgHxBScvaGJqvLfX8QUnL2hiary31w&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KYkF5Gycr9UxMe-Y3oOBpBwX&daddr=Jl.+Belimbing+No.100H,+Wonorejo,+Kec.+Marpoyan+Damai,+Kota+Pekanbaru,+Riau+28122"
-                 target="_blank" rel="noopener">Buka Google Maps</a>
             </div>
           </div>
 
-          <div>
+          <div class="map" aria-label="Peta lokasi Calthera">
             <iframe
-              title="Peta lokasi Calthera"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps?q=Jl.%20Belimbing%20No.100H%2C%20Wonorejo%2C%20Kec.%20Marpoyan%20Damai%2C%20Kota%20Pekanbaru%2C%20Riau%2028122&output=embed">
@@ -565,15 +672,14 @@
     <footer>
       <div class="container">
         <div class="foot">
-          <div class="brand" style="min-width:auto">
-            <div class="logo"><img src="assets/logo.svg" alt="Logo Calthera"></div>
-            <div class="t">
-              <strong>Calthera</strong>
-              <span class="muted">calthera.id · Pekanbaru</span>
+          <div class="mini">
+            <img src="assetslogo.svg" alt="Calthera">
+            <div>
+              <div style="color:var(--ink); font-weight:700;">Calthera</div>
+              <div style="font-size:12.5px;">Klinik Psikologi &amp; Tumbuh Kembang Anak · Pekanbaru</div>
             </div>
           </div>
-
-          <div class="muted small">© <span id="y"></span> Calthera. All rights reserved.</div>
+          <div>© <span id="y"></span> Calthera. All rights reserved.</div>
         </div>
       </div>
     </footer>
