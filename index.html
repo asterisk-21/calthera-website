@@ -5,370 +5,871 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Calthera — Klinik Psikologi & Tumbuh Kembang Anak</title>
   <meta name="description" content="Calthera adalah klinik psikologi & tumbuh kembang anak di Pekanbaru. Screening, terapi anak, konseling, asesmen psikologis, dan psikoterapi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --brand-1:#88ab8e; /* green */
-      --brand-2:#ffb570; /* orange */
-      --brand-3:#f6f0eb; /* cream */
-      --ink:#0f172a;
-      --muted:#475569;
-      --card:#ffffff;
-      --shadow: 0 18px 40px rgba(15, 23, 42, .08);
-      --shadow-soft: 0 10px 24px rgba(15, 23, 42, .06);
-      --radius: 22px;
+      --brand-1: #7fa888;
+      --brand-1-light: rgba(127,168,136,.15);
+      --brand-1-mid: rgba(127,168,136,.30);
+      --brand-2: #f5a55a;
+      --brand-2-light: rgba(245,165,90,.15);
+      --brand-2-mid: rgba(245,165,90,.30);
+      --brand-3: #f6f0eb;
+      --brand-3-dark: #ede5dd;
+      --ink: #0f172a;
+      --ink-soft: #1e293b;
+      --muted: #64748b;
+      --muted-light: #94a3b8;
+      --card: #ffffff;
+      --shadow: 0 20px 50px rgba(15,23,42,.09);
+      --shadow-soft: 0 8px 24px rgba(15,23,42,.06);
+      --shadow-hover: 0 24px 56px rgba(15,23,42,.13);
+      --radius: 20px;
       --radius-lg: 28px;
+      --radius-xl: 36px;
       --container: 1120px;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{background:#fff;}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--ink);
-      background:#fff;           /* <-- background solid */
-      position:relative;
-      overflow-x:hidden;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: #fff; }
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: #fff;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* FIX: background gradient jadi fixed layer biar scroll mulus tanpa “garis” */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:-1;
+    /* ─── BACKGROUND LAYER ─── */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
       background:
-        radial-gradient(1200px 600px at 15% 15%, rgba(255,181,112,.20), transparent 60%),
-        radial-gradient(900px 520px at 85% 10%, rgba(136,171,142,.22), transparent 55%),
-        linear-gradient(180deg, #fff, #fff);
+        radial-gradient(ellipse 1000px 600px at 8% 12%, rgba(245,165,90,.13), transparent 60%),
+        radial-gradient(ellipse 800px 500px at 92% 8%, rgba(127,168,136,.16), transparent 55%),
+        radial-gradient(ellipse 600px 400px at 50% 95%, rgba(127,168,136,.08), transparent 60%),
+        #fff;
       will-change: transform;
       transform: translateZ(0);
     }
 
-    a{color:inherit; text-decoration:none}
-    img{max-width:100%; display:block}
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-    .container{
+    .container {
       width: min(var(--container), calc(100% - 48px));
       margin: 0 auto;
     }
 
-    /* NAV */
-    .nav{
+    /* ─── NAV ─── */
+    .nav {
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(255,255,255,.72);
-      border-bottom: 0; /* <-- hilangin garis tipis */
+      z-index: 100;
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      background: rgba(255,255,255,.78);
+      border-bottom: 1px solid rgba(127,168,136,.12);
+      transition: box-shadow .3s ease;
     }
-    .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+    .nav.scrolled {
+      box-shadow: 0 4px 24px rgba(15,23,42,.07);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 14px 0;
       gap: 16px;
     }
-    .brand{
-      display:flex;
-      align-items:center;
+    .brand {
+      display: flex;
+      align-items: center;
       gap: 12px;
       min-width: 220px;
     }
-
-    /* LOGO (memanjang) */
-    .brand .logo{
-      background:none;
-      box-shadow:none;
-      width:auto;
-      height:auto;
-      padding:0;
+    .brand .logo img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      display: block;
     }
-    .brand .logo img{
-      height:58px;     /* Atur tinggi logo */
-      width:auto;      /* Biar mengikuti rasio */
-      object-fit:contain;
-      display:block;
-    }
-
-    .brand .text{line-height: 1.1;}
-    .brand .text b{
-      display:block;
+    .brand .text { line-height: 1.15; }
+    .brand .text b {
+      display: block;
       font-size: 15px;
-      letter-spacing: .2px;
-    }
-    .brand .text span{
-      display:block;
-      font-size: 12.5px;
-      color: var(--muted);
-      margin-top: 3px;
-    }
-    .nav-actions{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content:flex-end;
-    }
-
-    /* BUTTONS */
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
       font-weight: 700;
-      font-size: 14px;
-      border: 1px solid rgba(15,23,42,.08);
-      background: #fff;
-      box-shadow: 0 10px 20px rgba(15,23,42,.06);
-      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-      white-space: nowrap;
+      letter-spacing: .1px;
+      color: var(--ink);
     }
-    .btn:hover{transform: translateY(-1px); box-shadow: 0 16px 28px rgba(15,23,42,.10)}
-    .btn:active{transform: translateY(0px)}
-    .btn.primary{
-      background: rgba(136,171,142,.18);
-      border-color: rgba(136,171,142,.35);
+    .brand .text span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+      font-weight: 400;
     }
-    .btn.secondary{
-      background: rgba(255,181,112,.22);
-      border-color: rgba(255,181,112,.45);
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
-    /* HERO (FULL-BLEED, NO GAP AFTER HEADER) */
-    .hero{
-      padding: 0;
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13.5px;
+      border: 1.5px solid rgba(15,23,42,.08);
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 2px 8px rgba(15,23,42,.05), 0 1px 0 rgba(255,255,255,.9) inset;
+      transition: all .2s cubic-bezier(.34,1.56,.64,1);
+      white-space: nowrap;
+      cursor: pointer;
+      color: var(--ink);
+      letter-spacing: -.01em;
     }
-    .hero-card{
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(15,23,42,.12);
+    }
+    .btn:active { transform: translateY(0); }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(127,168,136,.28) 0%, rgba(127,168,136,.18) 100%);
+      border-color: rgba(127,168,136,.4);
+      color: #2d5a36;
+    }
+    .btn.primary:hover {
+      background: linear-gradient(135deg, rgba(127,168,136,.40) 0%, rgba(127,168,136,.28) 100%);
+      border-color: rgba(127,168,136,.6);
+    }
+    .btn.secondary {
+      background: linear-gradient(135deg, rgba(245,165,90,.25) 0%, rgba(245,165,90,.15) 100%);
+      border-color: rgba(245,165,90,.45);
+      color: #8a4500;
+    }
+    .btn.secondary:hover {
+      background: linear-gradient(135deg, rgba(245,165,90,.38) 0%, rgba(245,165,90,.25) 100%);
+    }
+    .btn.ghost {
+      background: transparent;
+      border-color: rgba(15,23,42,.10);
+      box-shadow: none;
+    }
+    .btn.ghost:hover {
+      background: rgba(127,168,136,.08);
+      border-color: rgba(127,168,136,.3);
+    }
+
+    /* ─── HERO ─── */
+    .hero { padding: 0; }
+    .hero-card {
       position: relative;
       width: 100%;
-      border-radius: 0;
-      box-shadow: none;
       overflow: hidden;
-      background: transparent; /* <-- penting biar gak ada “seam” */
+      background: transparent;
       transform: translateZ(0);
-      will-change: transform;
     }
 
-    /* illustration as FULL background (edge-to-edge, taller) */
-    .hero-card::after{
-      content:"";
-      position:absolute;
+    .hero-card::after {
+      content: "";
+      position: absolute;
       inset: 0;
       background-image: url("assetshero-illustration.png");
-      background-repeat:no-repeat;
+      background-repeat: no-repeat;
       background-position: center right;
       background-size: cover;
       opacity: 1;
-      pointer-events:none;
-      filter: saturate(1.02);
-      transform: scale(1.03); /* anti 1px seam */
+      pointer-events: none;
+      filter: saturate(1.05) brightness(1.01);
+      transform: scale(1.03);
     }
-
-    /* readability overlay + bottom fade (biar transisi ke bawah halus) */
-    .hero-card::before{
-      content:"";
-      position:absolute;
+    .hero-card::before {
+      content: "";
+      position: absolute;
       inset: 0;
       background:
-        radial-gradient(900px 520px at 18% 40%, rgba(255,255,255,.95), rgba(255,255,255,.65) 45%, rgba(255,255,255,0) 75%),
-        linear-gradient(90deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,.55) 42%, rgba(255,255,255,0) 70%),
-        linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 80%, rgba(255,255,255,.90) 100%);
-      pointer-events:none;
+        radial-gradient(900px 500px at 18% 40%, rgba(255,255,255,.96), rgba(255,255,255,.65) 45%, rgba(255,255,255,0) 72%),
+        linear-gradient(90deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.55) 40%, rgba(255,255,255,0) 68%),
+        linear-gradient(180deg, rgba(255,255,255,0) 75%, rgba(255,255,255,.92) 100%);
+      pointer-events: none;
       z-index: 0;
     }
 
-    .hero-inner{
+    .hero-inner {
       position: relative;
       z-index: 1;
-      padding: 42px 0 38px;
+      padding: 52px 0 44px;
     }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
       gap: 24px;
-      align-items:center;
-      min-height: 560px; /* <-- lebih panjang ke bawah */
+      align-items: center;
+      min-height: 560px;
     }
 
-    /* TEXT FRAME (box untuk area tulisan saja) */
-    .hero-panel{
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,.86);
-      box-shadow: var(--shadow);
-      padding: 30px 30px 22px;
-      max-width: 640px;
-      backdrop-filter: blur(6px);
+    .hero-panel {
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 24px 60px rgba(15,23,42,.10), 0 0 0 1px rgba(255,255,255,.7) inset;
+      padding: 36px 34px 28px;
+      max-width: 620px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.6);
+      animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .hero h1{
-      margin: 0 0 12px;
-      font-size: clamp(34px, 4.2vw, 54px);
-      line-height: 1.02;
-      letter-spacing: -0.02em;
+    /* Decorative accent bar */
+    .hero-panel::before {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 4px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--brand-1) 0%, var(--brand-2) 100%);
+      margin-bottom: 20px;
     }
-    .hero p{
-      margin: 0 0 18px;
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      margin: 0 0 14px;
+      font-size: clamp(32px, 3.8vw, 50px);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--brand-1);
+    }
+    .hero p {
+      margin: 0 0 22px;
       color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
-      max-width: 52ch;
+      font-size: 15.5px;
+      line-height: 1.75;
+      font-weight: 400;
+      max-width: 50ch;
     }
-    .hero .cta{
-      display:flex;
-      gap: 12px;
+    .hero p b { color: var(--ink-soft); font-weight: 600; }
+    .hero .cta {
+      display: flex;
+      gap: 10px;
       flex-wrap: wrap;
-      align-items:center;
-      margin-top: 8px;
+      align-items: center;
     }
 
-    /* focus line (no box, centered) */
-    .focus{
-      text-align:center;
-      padding: 18px 0 8px;
+    /* Trust badge */
+    .trust-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(15,23,42,.06);
+    }
+    .trust-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand-1);
+      flex-shrink: 0;
+    }
+    .trust-strip span {
+      font-size: 12.5px;
+      color: var(--muted-light);
+      font-weight: 500;
+    }
+
+    /* ─── FOCUS LINE ─── */
+    .focus {
+      text-align: center;
+      padding: 20px 0 10px;
       color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
+      font-size: 15.5px;
+      line-height: 1.75;
+      max-width: 72ch;
+      margin: 0 auto;
+      font-weight: 400;
     }
 
-    /* 3 big service highlight cards */
-    .pill-cards{ padding: 14px 0 26px; }
-    .pill-grid{
-      display:grid;
+    /* ─── PILL CARDS ─── */
+    .pill-cards { padding: 16px 0 28px; }
+    .pill-grid {
+      display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    .pill{
+    .pill {
       border-radius: var(--radius);
-      padding: 18px 18px 16px;
+      padding: 22px 20px 20px;
       box-shadow: var(--shadow-soft);
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(15,23,42,.06);
-      transition: transform .15s ease, box-shadow .15s ease;
-      min-height: 132px;
+      background: rgba(255,255,255,.88);
+      border: 1.5px solid rgba(15,23,42,.06);
+      transition: all .25s cubic-bezier(.34,1.56,.64,1);
+      min-height: 140px;
+      position: relative;
+      overflow: hidden;
     }
-    .pill:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(15,23,42,.10)}
-    .pill h3{ margin: 0 0 6px; font-size: 16px; letter-spacing: -0.01em; }
-    .pill p{ margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
-    .pill.tk{background: rgba(136,171,142,.14); border-color: rgba(136,171,142,.22)}
-    .pill.kp{background: rgba(255,181,112,.18); border-color: rgba(255,181,112,.28)}
-    .pill.ak{background: rgba(246,240,235,.95); border-color: rgba(15,23,42,.05)}
+    .pill::after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      opacity: .12;
+      transition: transform .3s ease;
+    }
+    .pill:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .pill:hover::after { transform: scale(1.4); }
+    .pill h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      margin: 0 0 8px;
+      font-size: 17px;
+      letter-spacing: -.01em;
+      color: var(--ink);
+    }
+    .pill p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.65; }
+    .pill .pill-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .pill.tk {
+      background: linear-gradient(135deg, rgba(127,168,136,.14) 0%, rgba(127,168,136,.06) 100%);
+      border-color: rgba(127,168,136,.25);
+    }
+    .pill.tk::after { background: var(--brand-1); }
+    .pill.kp {
+      background: linear-gradient(135deg, rgba(245,165,90,.16) 0%, rgba(245,165,90,.06) 100%);
+      border-color: rgba(245,165,90,.30);
+    }
+    .pill.kp::after { background: var(--brand-2); }
+    .pill.ak {
+      background: linear-gradient(135deg, rgba(246,240,235,.98) 0%, rgba(237,229,221,.6) 100%);
+      border-color: rgba(15,23,42,.07);
+    }
+    .pill.ak::after { background: var(--brand-3-dark); opacity: .6; }
 
-    /* sections */
-    section{ padding: 38px 0; }
-    .section-title{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
+    /* ─── SECTIONS ─── */
+    section { padding: 42px 0; }
+    .section-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--brand-1);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
       gap: 14px;
+      margin-bottom: 20px;
+    }
+    .section-title h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 30px;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+    .section-title p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; max-width: 60ch; }
+
+    /* ─── SERVICE CARDS ─── */
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .svc-card {
+      border-radius: var(--radius);
+      padding: 22px 20px 20px;
+      background: rgba(255,255,255,.9);
+      box-shadow: var(--shadow-soft);
+      border: 1.5px solid rgba(15,23,42,.06);
+      transition: all .22s ease;
+    }
+    .svc-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+    .svc-card header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
       margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid rgba(15,23,42,.06);
     }
-    .section-title h2{ margin:0; font-size: 26px; letter-spacing: -0.02em; }
-    .section-title p{ margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 62ch; }
-
-    /* service lists */
-    .svc-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
-    .svc-card{
-      border-radius: var(--radius);
-      padding: 18px 18px 16px;
-      background: rgba(255,255,255,.88);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(15,23,42,.06);
+    .svc-card header b {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 17px;
+      letter-spacing: -.01em;
+      line-height: 1.2;
     }
-    .svc-card header{ display:flex; align-items:center; justify-content:space-between; gap: 10px; margin-bottom: 10px; }
-    .svc-card header b{ font-size: 16px; letter-spacing: -0.01em; }
-    .svc-card small{ color: var(--muted); font-size: 13px; }
-    .svc-card ul{ margin: 10px 0 0; padding: 0 0 0 18px; color: var(--muted); line-height: 1.7; font-size: 14px; }
+    .svc-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge-green { background: var(--brand-1-light); color: #2d5a36; border: 1px solid rgba(127,168,136,.2); }
+    .badge-orange { background: var(--brand-2-light); color: #7a3800; border: 1px solid rgba(245,165,90,.2); }
+    .badge-cream { background: var(--brand-3); color: var(--muted); border: 1px solid rgba(15,23,42,.06); }
+    .svc-card ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .svc-card ul li {
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .svc-card ul li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand-1);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
 
-    /* gallery */
-    .gallery{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
-    .gcard{
+    /* ─── GALLERY ─── */
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .gcard {
       border-radius: var(--radius);
-      background: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.9);
       box-shadow: var(--shadow-soft);
-      overflow:hidden;
-      border: 1px solid rgba(15,23,42,.06);
+      overflow: hidden;
+      border: 1.5px solid rgba(15,23,42,.06);
       transform: translateZ(0);
+      transition: all .25s ease;
     }
-    .gcard .ph{ aspect-ratio: 4 / 3; background: rgba(246,240,235,.8); overflow:hidden; }
-    .gcard img{ width: 100%; height: 100%; object-fit: cover; }
-    .gcard .cap{ padding: 12px 14px 13px; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
-    .gcard .cap b{ display:block; color: var(--ink); font-size: 14px; margin-bottom: 3px; }
+    .gcard:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .gcard:hover .gcard-img img { transform: scale(1.04); }
+    .gcard-img { aspect-ratio: 4/3; background: var(--brand-3); overflow: hidden; }
+    .gcard-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .gcard .cap { padding: 13px 16px 15px; }
+    .gcard .cap b { display: block; color: var(--ink); font-size: 13.5px; font-weight: 600; margin-bottom: 3px; }
+    .gcard .cap span { color: var(--muted); font-size: 13px; line-height: 1.5; }
 
-    /* contact */
-    .contact-grid{ display:grid; grid-template-columns: 1fr 1.2fr; gap: 14px; margin-top: 14px; align-items:stretch; }
-    .panel{
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.88);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(15,23,42,.06);
-      padding: 18px;
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(127,168,136,.2) 30%, rgba(245,165,90,.2) 70%, transparent);
+      margin: 0;
+      border: none;
     }
-    .info-row{ display:flex; gap: 10px; margin: 12px 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
-    .dot{ width: 10px; height: 10px; border-radius: 999px; background: rgba(136,171,142,.7); margin-top: 6px; flex: 0 0 auto; }
-    .map{
-      border-radius: var(--radius);
-      overflow:hidden;
-      border: 1px solid rgba(15,23,42,.06);
-      box-shadow: var(--shadow-soft);
-      background: rgba(246,240,235,.8);
-      min-height: 360px;
-      transform: translateZ(0);
-    }
-    iframe{border:0; width:100%; height:100%}
 
-    footer{
-      padding: 26px 0 34px;
-      color: rgba(71,85,105,.9);
+    /* ─── CONSULTATION FORM SECTION ─── */
+    .form-section {
+      background: linear-gradient(135deg, rgba(127,168,136,.07) 0%, rgba(245,165,90,.05) 100%);
+      border-radius: var(--radius-xl);
+      padding: 44px 40px;
+      border: 1.5px solid rgba(127,168,136,.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .form-section::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(127,168,136,.12), transparent 70%);
+      pointer-events: none;
+    }
+    .form-section::after {
+      content: "";
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,165,90,.10), transparent 70%);
+      pointer-events: none;
+    }
+
+    .form-header { margin-bottom: 30px; }
+    .form-header h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 28px;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .form-header p { color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-full { grid-column: 1 / -1; }
+
+    .form-group { display: flex; flex-direction: column; gap: 7px; position: relative; }
+    .form-group label {
       font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      letter-spacing: .01em;
     }
-    .foot{ display:flex; align-items:center; justify-content:space-between; gap: 12px; flex-wrap: wrap; }
-    .foot .mini{ display:flex; align-items:center; gap: 10px; }
-    .foot .mini img{ height: 36px; width: auto; object-fit: contain; opacity: .95; }
+    .form-group label span.req {
+      color: var(--brand-2);
+      margin-left: 3px;
+    }
 
-    /* responsive */
-    @media (max-width: 980px){
-      .hero-inner{ padding: 26px 0 22px; }
-      .hero-grid{ grid-template-columns: 1fr; min-height: 680px; }
-      .hero-card::after{ background-position: center; background-size: cover; transform: scale(1.03); }
-      .hero-card::before{
-        background:
-          linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.60) 45%, rgba(255,255,255,0) 80%);
+    /* Input & Textarea */
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.85);
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: all .2s ease;
+      box-shadow: 0 1px 3px rgba(15,23,42,.04) inset;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: rgba(127,168,136,.55);
+      background: rgba(255,255,255,.98);
+      box-shadow: 0 0 0 3px rgba(127,168,136,.12);
+    }
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: var(--muted-light);
+    }
+    .form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+
+    /* Radio/Checkbox style choices */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .choice-option {
+      position: relative;
+    }
+    .choice-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .choice-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.8);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .18s ease;
+      user-select: none;
+    }
+    .choice-label:hover {
+      border-color: rgba(127,168,136,.4);
+      background: rgba(127,168,136,.06);
+      color: var(--ink);
+    }
+    .choice-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid rgba(15,23,42,.15);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .18s ease;
+    }
+    .choice-dot::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand-1);
+      opacity: 0;
+      transform: scale(0);
+      transition: all .18s cubic-bezier(.34,1.56,.64,1);
+    }
+    .choice-option input[type="radio"]:checked + .choice-label {
+      border-color: rgba(127,168,136,.5);
+      background: linear-gradient(135deg, rgba(127,168,136,.14) 0%, rgba(127,168,136,.07) 100%);
+      color: #2d5a36;
+      box-shadow: 0 2px 8px rgba(127,168,136,.15);
+    }
+    .choice-option input[type="radio"]:checked + .choice-label .choice-dot {
+      border-color: var(--brand-1);
+    }
+    .choice-option input[type="radio"]:checked + .choice-label .choice-dot::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Submit button */
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      background: linear-gradient(135deg, #7fa888 0%, #6a9674 100%);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(127,168,136,.40), 0 2px 0 rgba(255,255,255,.2) inset;
+      cursor: pointer;
+      transition: all .22s cubic-bezier(.34,1.56,.64,1);
+      letter-spacing: -.01em;
+    }
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(127,168,136,.50), 0 2px 0 rgba(255,255,255,.2) inset;
+    }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit svg { transition: transform .2s ease; }
+    .btn-submit:hover svg { transform: translateX(3px); }
+
+    /* Success state */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 32px 24px;
+      animation: fadeUp .5s ease both;
+    }
+    .form-success .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(127,168,136,.2) 0%, rgba(127,168,136,.1) 100%);
+      border: 2px solid rgba(127,168,136,.3);
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    .form-success h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .form-success p { color: var(--muted); font-size: 14.5px; line-height: 1.65; margin-bottom: 20px; }
+
+    /* ─── CONTACT ─── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 14px; align-items: stretch; }
+    .panel {
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.9);
+      box-shadow: var(--shadow-soft);
+      border: 1.5px solid rgba(15,23,42,.06);
+      padding: 22px;
+    }
+    .info-row { display: flex; gap: 12px; margin: 14px 0; color: var(--muted); line-height: 1.65; font-size: 14px; }
+    .info-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+    .icon-green { background: var(--brand-1-light); }
+    .icon-orange { background: var(--brand-2-light); }
+    .icon-cream { background: var(--brand-3); }
+    .info-row b { display: block; color: var(--ink); font-weight: 600; font-size: 13px; margin-bottom: 3px; }
+    .map {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1.5px solid rgba(15,23,42,.06);
+      box-shadow: var(--shadow-soft);
+      background: var(--brand-3);
+      min-height: 340px;
+      transform: translateZ(0);
+    }
+    iframe { border: 0; width: 100%; height: 100%; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 28px 0 36px;
+      border-top: 1px solid rgba(15,23,42,.06);
+    }
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .foot .mini { display: flex; align-items: center; gap: 10px; }
+    .foot .mini img { height: 34px; width: auto; object-fit: contain; }
+    .foot .mini b { display: block; font-size: 14px; font-weight: 700; color: var(--ink); }
+    .foot .mini span { display: block; font-size: 12px; color: var(--muted); }
+    .foot-copy { font-size: 12.5px; color: var(--muted-light); }
+
+    /* ─── FLOATING WHATSAPP ─── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .wa-tooltip {
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 10px;
+      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(15,23,42,.25);
+      opacity: 0;
+      transform: translateX(8px) scale(.94);
+      transition: all .25s cubic-bezier(.34,1.56,.64,1);
+      pointer-events: none;
+    }
+    .wa-tooltip::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      bottom: -5px;
+      width: 10px;
+      height: 10px;
+      background: var(--ink);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+    .wa-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366 0%, #1db954 100%);
+      box-shadow: 0 8px 28px rgba(37,211,102,.45), 0 2px 0 rgba(255,255,255,.3) inset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .25s cubic-bezier(.34,1.56,.64,1);
+      border: none;
+      cursor: pointer;
+      animation: waPop .6s 1.5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes waPop {
+      from { opacity: 0; transform: scale(.4); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .wa-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 14px 36px rgba(37,211,102,.55);
+    }
+    .wa-btn svg { width: 30px; height: 30px; }
+    .wa-float:hover .wa-tooltip {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+    /* Pulse ring */
+    .wa-btn::before {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(37,211,102,.35);
+      animation: waPulse 2.5s ease-out infinite;
+    }
+    @keyframes waPulse {
+      0% { transform: scale(1); opacity: .6; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 980px) {
+      .hero-inner { padding: 28px 0 24px; }
+      .hero-grid { grid-template-columns: 1fr; min-height: 680px; }
+      .hero-card::after { background-position: center top; background-size: cover; }
+      .hero-card::before {
+        background: linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.60) 50%, rgba(255,255,255,0) 80%);
       }
-      .hero-panel{ padding: 22px 18px 16px; margin-top: 190px; max-width: unset; }
-      .pill-grid, .svc-grid, .gallery, .contact-grid{ grid-template-columns: 1fr; }
-      .nav-inner{padding: 18px 0}
-      .brand{min-width: unset}
+      .hero-panel { margin-top: 200px; max-width: unset; padding: 24px 20px 20px; }
+      .pill-grid, .svc-grid, .gallery, .contact-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .choice-grid { grid-template-columns: 1fr; }
+      .form-section { padding: 28px 20px; }
+      .nav-inner { padding: 14px 0; }
+      .brand { min-width: unset; }
+      .wa-float { bottom: 20px; right: 20px; }
+    }
+
+    @media (max-width: 600px) {
+      .container { width: calc(100% - 32px); }
+      .section-title { flex-direction: column; align-items: flex-start; }
     }
   </style>
 
   <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1748455876111930');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-  
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1748455876111930');fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"/></noscript>
 </head>
 
 <body>
-  <header class="nav">
+  <!-- NAV -->
+  <header class="nav" id="mainNav">
     <div class="container">
       <div class="nav-inner">
         <a class="brand" href="#top" aria-label="Calthera Home">
@@ -380,9 +881,8 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
             <span>Klinik Psikologi &amp; Tumbuh Kembang Anak</span>
           </div>
         </a>
-
         <div class="nav-actions">
-          <a class="btn" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
           <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
@@ -390,6 +890,7 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
   </header>
 
   <main id="top">
+    <!-- HERO -->
     <div class="hero">
       <div class="hero-card">
         <div class="container">
@@ -397,20 +898,22 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
             <div class="hero-grid">
               <div>
                 <div class="hero-panel">
-                  <h1>Dampingi Tumbuh Kembang Anak Dengan Profesional Dan Terarah</h1>
+                  <h1>Dampingi Tumbuh Kembang Anak Dengan <em>Profesional</em> Dan Terarah</h1>
                   <p>
                     Calthera adalah klinik psikologi &amp; tumbuh kembang anak di Pekanbaru.
                     Kami melayani <b>screening</b>, <b>terapi anak</b>, <b>konseling</b>, <b>asesmen psikologis</b>, dan <b>psikoterapi</b>.
                   </p>
-
                   <div class="cta">
                     <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
-                    <a class="btn secondary" href="#kontak">Lihat Lokasi &amp; Jam Buka</a>
-                    <a class="btn" href="#layanan">Lihat Layanan</a>
+                    <a class="btn secondary" href="#kontak">Lokasi &amp; Jam Buka</a>
+                    <a class="btn ghost" href="#layanan">Lihat Layanan</a>
+                  </div>
+                  <div class="trust-strip">
+                    <div class="trust-dot"></div>
+                    <span>Psikolog klinis berlisensi · Pekanbaru, Riau</span>
                   </div>
                 </div>
               </div>
-
               <div aria-hidden="true"></div>
             </div>
           </div>
@@ -425,14 +928,17 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
         <div class="pill-cards">
           <div class="pill-grid">
             <div class="pill tk">
+              <span class="pill-icon">🌱</span>
               <h3>Tumbuh Kembang Anak</h3>
               <p>Pendampingan perkembangan anak dari pemetaan kebutuhan, rencana terapi, hingga evaluasi progres secara berkala.</p>
             </div>
             <div class="pill kp">
+              <span class="pill-icon">🤝</span>
               <h3>Konseling &amp; Psikoterapi</h3>
               <p>Ruang aman untuk anak, remaja, dewasa, pasangan, dan keluarga dengan pendekatan profesional.</p>
             </div>
             <div class="pill ak">
+              <span class="pill-icon">📋</span>
               <h3>Asesmen Klinis</h3>
               <p>Pemeriksaan psikologis terstruktur untuk memahami kondisi, kekuatan, dan kebutuhan sebagai dasar rekomendasi yang jelas.</p>
             </div>
@@ -441,11 +947,15 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
       </div>
     </div>
 
+    <hr class="divider">
+
+    <!-- LAYANAN -->
     <section id="layanan">
       <div class="container">
         <div class="section-title">
           <div>
-            <h2>Layanan Calthera</h2>
+            <div class="section-label">Layanan</div>
+            <h2>Apa yang Kami Tawarkan</h2>
           </div>
         </div>
 
@@ -453,7 +963,7 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
           <div class="svc-card">
             <header>
               <b>Tumbuh Kembang Anak</b>
-              <small>Screening &amp; Terapi</small>
+              <span class="svc-badge badge-green">Screening &amp; Terapi</span>
             </header>
             <ul>
               <li>Screening Tumbuh Kembang</li>
@@ -466,11 +976,10 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
               <li>Terapi Remedial</li>
             </ul>
           </div>
-
           <div class="svc-card">
             <header>
               <b>Konseling &amp; Psikoterapi</b>
-              <small>Offline &amp; Online</small>
+              <span class="svc-badge badge-orange">Offline &amp; Online</span>
             </header>
             <ul>
               <li>Konseling Anak &amp; Dewasa</li>
@@ -480,114 +989,203 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
               <li>Psikoterapi</li>
             </ul>
           </div>
-
           <div class="svc-card">
             <header>
               <b>Asesmen Klinis</b>
-              <small>Anak–Remaja &amp; Dewasa</small>
+              <span class="svc-badge badge-cream">Anak–Remaja &amp; Dewasa</span>
             </header>
             <ul>
-              <li>Asesmen Anak &amp; Remaja: Kecerdasan</li>
-              <li>Asesmen Anak &amp; Remaja: Kesiapan Belajar</li>
+              <li>Asesmen Kecerdasan Anak &amp; Remaja</li>
+              <li>Asesmen Kesiapan Belajar</li>
               <li>Psikotes Lengkap (Kecerdasan, Minat Bakat &amp; Penjurusan)</li>
               <li>Asesmen Klinis</li>
-              <li>Asesmen Dewasa: Kesehatan Mental</li>
-              <li>Asesmen Dewasa: Kepribadian</li>
-              <li>Asesmen Dewasa: Pengembangan Karir</li>
+              <li>Asesmen Kesehatan Mental Dewasa</li>
+              <li>Asesmen Kepribadian</li>
+              <li>Asesmen Pengembangan Karir</li>
             </ul>
           </div>
         </div>
 
-        <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
           <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Chat WhatsApp</a>
-          <a class="btn" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
     </section>
 
+    <hr class="divider">
+
+    <!-- KLINIK / GALLERY -->
     <section id="klinik">
       <div class="container">
         <div class="section-title">
           <div>
-            <h2>Klinik</h2>
-            <p>Beberapa suasana ruangan di Calthera.</p>
+            <div class="section-label">Klinik</div>
+            <h2>Suasana Calthera</h2>
           </div>
+          <p>Ruangan yang nyaman, hangat, dan dirancang untuk mendukung proses pemulihan.</p>
         </div>
 
         <div class="gallery">
           <div class="gcard">
-            <div class="ph"><img src="assetsclinic-1.jpg" alt="Ruang tunggu Calthera"></div>
-            <div class="cap"><b>Ruang Tunggu</b>Nyaman, terang, dan ramah anak.</div>
+            <div class="gcard-img"><img src="assetsclinic-1.jpg" alt="Ruang tunggu Calthera" loading="lazy"></div>
+            <div class="cap"><b>Ruang Tunggu</b><span>Nyaman, terang, dan ramah anak.</span></div>
           </div>
-
           <div class="gcard">
-            <div class="ph"><img src="assetsclinic-2.jpg" alt="Ruang konseling Calthera"></div>
-            <div class="cap"><b>Ruang Konseling</b>Privat, tenang, dan hangat.</div>
+            <div class="gcard-img"><img src="assetsclinic-2.jpg" alt="Ruang konseling Calthera" loading="lazy"></div>
+            <div class="cap"><b>Ruang Konseling</b><span>Privat, tenang, dan hangat.</span></div>
           </div>
-
           <div class="gcard">
-            <div class="ph"><img src="assetstherapy-room.jpeg" alt="Ruang terapi anak Calthera"></div>
-            <div class="cap"><b>Ruang Terapi Anak</b>Area terapi untuk stimulasi &amp; aktivitas.</div>
+            <div class="gcard-img"><img src="assetstherapy-room.jpeg" alt="Ruang terapi anak Calthera" loading="lazy"></div>
+            <div class="cap"><b>Ruang Terapi Anak</b><span>Area terapi untuk stimulasi &amp; aktivitas.</span></div>
           </div>
-
           <div class="gcard">
-            <div class="ph"><img src="assetsclinic-3.jpg" alt="Ruang klinik Calthera"></div>
-            <div class="cap"><b>Ruang Terapi Anak</b>Suasana bersih dan tertata.</div>
+            <div class="gcard-img"><img src="assetsclinic-3.jpg" alt="Ruang klinik Calthera" loading="lazy"></div>
+            <div class="cap"><b>Ruang Terapi Anak</b><span>Suasana bersih dan tertata.</span></div>
           </div>
-
           <div class="gcard">
-            <div class="ph"><img src="assetsclinic-psy-1.jpg" alt="Ruang psikolog Calthera"></div>
-            <div class="cap"><b>Ruang Psikolog</b>Ruang sesi yang nyaman dan aman.</div>
+            <div class="gcard-img"><img src="assetsclinic-psy-1.jpg" alt="Ruang psikolog Calthera" loading="lazy"></div>
+            <div class="cap"><b>Ruang Psikolog</b><span>Ruang sesi yang nyaman dan aman.</span></div>
           </div>
-
           <div class="gcard">
-            <div class="ph"><img src="assetsclinic-psy-2.jpg" alt="Ruang psikolog Calthera (2)"></div>
-            <div class="cap"><b>Ruang Konseling</b>Alternatif ruangan sesi lainnya.</div>
+            <div class="gcard-img"><img src="assetsclinic-psy-2.jpg" alt="Ruang psikolog Calthera 2" loading="lazy"></div>
+            <div class="cap"><b>Ruang Konseling</b><span>Alternatif ruangan sesi lainnya.</span></div>
           </div>
         </div>
       </div>
     </section>
 
+    <hr class="divider">
+
+    <!-- CONSULTATION FORM -->
+    <section id="konsultasi">
+      <div class="container">
+        <div class="form-section">
+          <div class="form-header">
+            <div class="section-label">Pendaftaran</div>
+            <h2>Daftarkan Kebutuhan Anda</h2>
+            <p>Isi formulir di bawah dan tim kami akan segera menghubungi Anda melalui WhatsApp untuk konfirmasi jadwal.</p>
+          </div>
+
+          <div id="formWrapper">
+            <div class="form-grid" id="consultForm">
+              <!-- Nama -->
+              <div class="form-group">
+                <label for="f_nama">Nama Lengkap <span class="req">*</span></label>
+                <input type="text" id="f_nama" class="form-input" placeholder="Masukkan nama lengkap Anda" autocomplete="name">
+              </div>
+
+              <!-- Nomor WA -->
+              <div class="form-group">
+                <label for="f_wa">Nomor WhatsApp <span class="req">*</span></label>
+                <input type="tel" id="f_wa" class="form-input" placeholder="Contoh: 08123456789" autocomplete="tel">
+              </div>
+
+              <!-- Kebutuhan -->
+              <div class="form-group form-full">
+                <label>Kebutuhan <span class="req">*</span></label>
+                <div class="choice-grid">
+                  <div class="choice-option">
+                    <input type="radio" name="kebutuhan" id="k_tk" value="Tumbuh Kembang">
+                    <label class="choice-label" for="k_tk">
+                      <span class="choice-dot"></span>
+                      Tumbuh Kembang
+                    </label>
+                  </div>
+                  <div class="choice-option">
+                    <input type="radio" name="kebutuhan" id="k_kp" value="Konseling Psikologi">
+                    <label class="choice-label" for="k_kp">
+                      <span class="choice-dot"></span>
+                      Konseling Psikologi
+                    </label>
+                  </div>
+                  <div class="choice-option">
+                    <input type="radio" name="kebutuhan" id="k_ps" value="Psikotes">
+                    <label class="choice-label" for="k_ps">
+                      <span class="choice-dot"></span>
+                      Psikotes
+                    </label>
+                  </div>
+                  <div class="choice-option">
+                    <input type="radio" name="kebutuhan" id="k_lm" value="Konseling Laktasi & MPASI">
+                    <label class="choice-label" for="k_lm">
+                      <span class="choice-dot"></span>
+                      Konseling Laktasi &amp; MPASI
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Keluhan -->
+              <div class="form-group form-full">
+                <label for="f_keluhan">Keluhan / Cerita Singkat <span class="req">*</span></label>
+                <textarea id="f_keluhan" class="form-textarea" placeholder="Ceritakan keluhan atau kebutuhan Anda secara singkat agar kami bisa mempersiapkan yang terbaik…"></textarea>
+              </div>
+
+              <!-- Submit -->
+              <div class="form-full" style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                <button class="btn-submit" onclick="submitForm()">
+                  Kirim via WhatsApp
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <span style="font-size:12.5px; color: var(--muted-light);">Kami merespons dalam 1×24 jam kerja</span>
+              </div>
+            </div>
+
+            <!-- Success state -->
+            <div class="form-success" id="formSuccess">
+              <div class="success-icon">✓</div>
+              <h3>Pesan Terkirim!</h3>
+              <p>WhatsApp Anda akan terbuka dengan pesan yang sudah disiapkan.<br>Tim Calthera akan segera merespons.</p>
+              <a class="btn primary" href="#layanan">Kembali ke Layanan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- KONTAK -->
     <section id="kontak">
       <div class="container">
         <div class="section-title">
           <div>
+            <div class="section-label">Temukan Kami</div>
             <h2>Kontak &amp; Lokasi</h2>
-            <p>Alamat, jam operasional, dan peta lokasi Calthera.</p>
           </div>
+          <p>Alamat, jam operasional, dan peta lokasi Calthera.</p>
         </div>
 
         <div class="contact-grid">
           <div class="panel">
             <div class="info-row">
-              <span class="dot"></span>
+              <div class="info-icon icon-green">🕐</div>
               <div>
-                <b style="display:block;color:var(--ink)">Jam Operasional</b>
+                <b>Jam Operasional</b>
                 Senin–Sabtu · 09:00–17:00 WIB
               </div>
             </div>
-
             <div class="info-row">
-              <span class="dot" style="background: rgba(255,181,112,.85)"></span>
+              <div class="info-icon icon-orange">📍</div>
               <div>
-                <b style="display:block;color:var(--ink)">Alamat</b>
+                <b>Alamat</b>
                 Jl. Belimbing No.100H, Wonorejo, Kec. Marpoyan Damai,<br>
                 Kota Pekanbaru, Riau 28122
               </div>
             </div>
-
             <div class="info-row">
-              <span class="dot" style="background: rgba(246,240,235,.95); border:1px solid rgba(15,23,42,.10)"></span>
+              <div class="info-icon icon-cream">🗺️</div>
               <div>
-                <b style="display:block;color:var(--ink)">Tautan</b>
-                <a class="btn" style="padding:9px 12px; margin-top:8px" href="https://www.google.com/maps?rlz=1C1GCEU_enID1184ID1184&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQIxgnMgwIAhAjGCcYgAQYigUyDggDEC4YChgLGLEDGIAEMhEIBBAuGAoYCxiDARixAxiABDIUCAUQLhgKGAsYrwEYxwEYgAQYjgUyBggGEEUYPDIGCAcQRRg80gEIMjI0OWowajSoAgCwAgHxBScvaGJqvLfX8QUnL2hiary31w&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KYkF5Gycr9UxMe-Y3oOBpBwX&daddr=Jl.+Belimbing+No.100H,+Wonorejo,+Kec.+Marpoyan+Damai,+Kota+Pekanbaru,+Riau+28122"
-                   target="_blank" rel="noopener">Buka di Google Maps</a>
+                <b>Navigasi</b>
+                <a class="btn ghost" style="padding:8px 14px; margin-top:8px; font-size:13px;" href="https://www.google.com/maps?rlz=1C1GCEU_enID1184ID1184&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQIxgnMgwIAhAjGCcYgAQYigUyDggDEC4YChgLGLEDGIAEMhEIBBAuGAoYCxiDARixAxiABDIUCAUQLhgKGAsYrwEYxwEYgAQYjgUyBggGEEUYPDIGCAcQRRg80gEIMjI0OWowajSoAgCwAgHxBScvaGJqvLfX8QUnL2hiary31w&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KYkF5Gycr9UxMe-Y3oOBpBwX&daddr=Jl.+Belimbing+No.100H,+Wonorejo,+Kec.+Marpoyan+Damai,+Kota+Pekanbaru,+Riau+28122" target="_blank" rel="noopener">
+                  Buka di Google Maps ↗
+                </a>
               </div>
             </div>
-
-            <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
+            <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; padding-top:16px; border-top: 1px solid rgba(15,23,42,.06);">
               <a class="btn primary" href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener">Chat WhatsApp</a>
-              <a class="btn" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
+              <a class="btn ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
             </div>
           </div>
 
@@ -595,72 +1193,99 @@ src="https://www.facebook.com/tr?id=1748455876111930&ev=PageView&noscript=1"
             <iframe
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Jl.%20Belimbing%20No.100H%2C%20Wonorejo%2C%20Kec.%20Marpoyan%20Damai%2C%20Kota%20Pekanbaru%2C%20Riau%2028122&output=embed">
+              src="https://www.google.com/maps?q=Jl.%20Belimbing%20No.100H%2C%20Wonorejo%2C%20Kec.%20Marpoyan%20Damai%2C%20Kota%20Pekanbaru%2C%20Riau%2028122&output=embed"
+              title="Lokasi Calthera">
             </iframe>
           </div>
         </div>
       </div>
     </section>
-
-    <footer>
-      <div class="container">
-        <div class="foot">
-          <div class="mini">
-            <img src="assetslogo.svg" alt="Calthera">
-            <div>
-              <div style="color:var(--ink); font-weight:700;">Calthera</div>
-              <div style="font-size:12.5px;">Klinik Psikologi &amp; Tumbuh Kembang Anak · Pekanbaru</div>
-            </div>
-          </div>
-          <div>© <span id="y"></span> Calthera. All rights reserved.</div>
-        </div>
-      </div>
-    </footer>
   </main>
 
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div class="mini">
+          <img src="assetslogo.svg" alt="Calthera">
+          <div>
+            <b>Calthera</b>
+            <span>Klinik Psikologi &amp; Tumbuh Kembang Anak · Pekanbaru</span>
+          </div>
+        </div>
+        <div class="foot-copy">© <span id="y"></span> Calthera. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <div class="wa-float" role="complementary" aria-label="Hubungi via WhatsApp">
+    <div class="wa-tooltip">Hubungi Kami 👋</div>
+    <a href="https://wa.me/message/KGPDUV4JPNXBN1" target="_blank" rel="noopener" class="wa-btn" aria-label="Chat WhatsApp Calthera">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </a>
+  </div>
+
   <script>
+    // Year
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Sticky nav shadow
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Form submission — composes WhatsApp message
+    function submitForm() {
+      const nama = document.getElementById('f_nama').value.trim();
+      const wa = document.getElementById('f_wa').value.trim();
+      const kebutuhanEl = document.querySelector('input[name="kebutuhan"]:checked');
+      const keluhan = document.getElementById('f_keluhan').value.trim();
+
+      if (!nama) { alert('Mohon masukkan nama lengkap Anda.'); document.getElementById('f_nama').focus(); return; }
+      if (!wa) { alert('Mohon masukkan nomor WhatsApp Anda.'); document.getElementById('f_wa').focus(); return; }
+      if (!kebutuhanEl) { alert('Mohon pilih kebutuhan Anda.'); return; }
+      if (!keluhan) { alert('Mohon tuliskan keluhan atau cerita singkat Anda.'); document.getElementById('f_keluhan').focus(); return; }
+
+      const kebutuhan = kebutuhanEl.value;
+      const msg = `Halo Calthera! 👋\n\nSaya ingin mendaftarkan kebutuhan saya:\n\n*Nama:* ${nama}\n*No. WhatsApp:* ${wa}\n*Kebutuhan:* ${kebutuhan}\n*Keluhan:*\n${keluhan}\n\nMohon info lebih lanjut, terima kasih! 🙏`;
+      const encoded = encodeURIComponent(msg);
+
+      // Track with Meta Pixel
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: 'Consultation Form Submit',
+          content_category: kebutuhan
+        });
+      }
+
+      // Show success, then open WA
+      document.getElementById('consultForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      window.open(`https://wa.me/message/KGPDUV4JPNXBN1?text=${encoded}`, '_blank');
+    }
+
+    // Meta Pixel — WA button tracking
+    (function () {
+      function isWALink(a) {
+        const h = (a.getAttribute('href') || '').toLowerCase();
+        return h.includes('wa.me/') || h.includes('api.whatsapp.com/');
+      }
+      document.addEventListener('click', function (e) {
+        const a = e.target.closest && e.target.closest('a');
+        if (!a || !isWALink(a)) return;
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            content_name: 'WhatsApp Click',
+            button_label: (a.textContent || '').trim().slice(0, 60),
+            link_url: a.getAttribute('href') || ''
+          });
+        }
+      }, true);
+    })();
   </script>
-
-<script>
-  (function () {
-    function isWhatsAppLink(a) {
-      const href = (a.getAttribute('href') || '').toLowerCase();
-      return href.includes('wa.me/') || href.includes('api.whatsapp.com/');
-    }
-
-    function pickLabel(a) {
-      // label biar kebaca di Events Manager
-      const text = (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60);
-      const href = a.getAttribute('href') || '';
-      return text || href;
-    }
-
-    function trackWhatsAppClick(a) {
-      if (typeof fbq !== 'function') return;
-
-      // Pilih salah satu: Lead atau Contact
-      fbq('track', 'Lead', {
-        content_name: 'WhatsApp Click',
-        button_label: pickLabel(a),
-        link_url: a.getAttribute('href') || ''
-      });
-
-      // Alternatif (kalau kamu lebih suka Contact):
-      // fbq('track', 'Contact', { ... });
-    }
-
-    // Event delegation: aman untuk tombol yang banyak / dinamis
-    document.addEventListener('click', function (e) {
-      const a = e.target.closest && e.target.closest('a');
-      if (!a) return;
-      if (!isWhatsAppLink(a)) return;
-
-      trackWhatsAppClick(a);
-    }, true);
-  })();
-</script>
-
-  
 </body>
 </html>
