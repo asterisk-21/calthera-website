@@ -124,6 +124,56 @@
       justify-content: flex-end;
     }
 
+
+    .btn.booking-soft {
+      background: linear-gradient(135deg, rgba(127,168,136,.18) 0%, rgba(245,165,90,.14) 100%);
+      border-color: rgba(127,168,136,.32);
+      color: #2d5a36;
+    }
+    .btn.booking-soft:hover {
+      background: linear-gradient(135deg, rgba(127,168,136,.28) 0%, rgba(245,165,90,.22) 100%);
+      border-color: rgba(127,168,136,.48);
+    }
+    .online-service-note {
+      margin-top: 20px;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      background:
+        radial-gradient(circle at top right, rgba(245,165,90,.15), transparent 40%),
+        linear-gradient(135deg, rgba(127,168,136,.10), rgba(255,255,255,.90));
+      border: 1.5px solid rgba(127,168,136,.20);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .online-service-note b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 21px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .online-service-note p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13.8px;
+      line-height: 1.65;
+      max-width: 74ch;
+    }
+    .mini-note {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(127,168,136,.08);
+      border: 1px solid rgba(127,168,136,.16);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
     /* ─── BUTTONS ─── */
     .btn {
       display: inline-flex;
@@ -851,6 +901,7 @@
       .nav-inner { padding: 14px 0; }
       .brand { min-width: unset; }
       .wa-float { bottom: 20px; right: 20px; }
+      .online-service-note { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 600px) {
@@ -884,6 +935,7 @@
         <div class="nav-actions">
           <a class="btn ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
           <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn booking-soft" href="https://app.calthera.id/booking" target="_blank" rel="noopener">Konseling Online</a>
         </div>
       </div>
     </div>
@@ -905,6 +957,7 @@
                   </p>
                   <div class="cta">
                     <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
+                    <a class="btn booking-soft" href="https://app.calthera.id/booking" target="_blank" rel="noopener">Booking Konseling Online</a>
                     <a class="btn secondary" href="#kontak">Lokasi &amp; Jam Buka</a>
                     <a class="btn ghost" href="#layanan">Lihat Layanan</a>
                   </div>
@@ -923,6 +976,21 @@
       <div class="container">
         <div class="focus">
           Membantu anak &amp; keluarga memahami kebutuhan, menyusun rencana, dan menjalankan pendampingan secara konsisten dengan komunikasi yang mudah dipahami.
+        </div>
+
+        <div class="online-service-note">
+          <div>
+            <b>Layanan online tersedia untuk kebutuhan tertentu</b>
+            <p>
+              Booking mandiri melalui aplikasi saat ini tersedia untuk <b>konseling online</b>. 
+              Untuk <b>asesmen potensi diri / pengembangan karir online</b>, pendaftaran tetap dibantu admin melalui WhatsApp. 
+              Layanan tumbuh kembang anak, terapi, dan asesmen lainnya tetap dikonfirmasi melalui admin.
+            </p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn booking-soft" href="https://app.calthera.id/booking" target="_blank" rel="noopener">Booking Konseling Online</a>
+            <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Tanya Admin</a>
+          </div>
         </div>
 
         <div class="pill-cards">
@@ -988,6 +1056,9 @@
               <li>Konseling Pra-Nikah &amp; Asesmen</li>
               <li>Psikoterapi</li>
             </ul>
+            <div class="mini-note">
+              Konseling online dapat langsung dipesan melalui aplikasi booking Calthera. Konsultasi awal dan layanan lain tetap dapat melalui WhatsApp.
+            </div>
           </div>
           <div class="svc-card">
             <header>
@@ -1002,12 +1073,17 @@
               <li>Asesmen Kesehatan Mental Dewasa</li>
               <li>Asesmen Kepribadian</li>
               <li>Asesmen Pengembangan Karir</li>
+              <li>Asesmen Potensi Diri / Pengembangan Karir</li>
             </ul>
+            <div class="mini-note">
+              Asesmen potensi diri / pengembangan karir dapat dilakukan online, namun pendaftaran dan penjadwalannya tetap melalui admin WhatsApp.
+            </div>
           </div>
         </div>
 
         <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
           <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Chat WhatsApp</a>
+          <a class="btn booking-soft" href="https://app.calthera.id/booking" target="_blank" rel="noopener">Booking Konseling Online</a>
           <a class="btn ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
@@ -1064,7 +1140,11 @@
           <div class="form-header">
             <div class="section-label">Pendaftaran</div>
             <h2>Daftarkan Kebutuhan Anda</h2>
-            <p>Isi formulir di bawah dan tim kami akan segera menghubungi Anda melalui WhatsApp untuk konfirmasi jadwal.</p>
+            <p>Isi formulir di bawah dan tim kami akan segera menghubungi Anda melalui WhatsApp untuk konfirmasi jadwal. Untuk konseling online, Anda dapat langsung memilih jadwal melalui aplikasi booking Calthera.</p>
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Daftar via WhatsApp</a>
+              <a class="btn booking-soft" href="https://app.calthera.id/booking" target="_blank" rel="noopener">Booking Konseling Online</a>
+            </div>
           </div>
 
           <div id="formWrapper">
@@ -1286,6 +1366,24 @@
         }
       }, true);
     })();
+
+    // Meta Pixel — online booking click tracking
+    (function () {
+      document.addEventListener('click', function (e) {
+        const a = e.target.closest && e.target.closest('a');
+        if (!a) return;
+        const href = (a.getAttribute('href') || '').toLowerCase();
+        if (!href.includes('app.calthera.id')) return;
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            content_name: 'Online Booking Click',
+            button_label: (a.textContent || '').trim().slice(0, 60),
+            link_url: a.getAttribute('href') || ''
+          });
+        }
+      }, true);
+    })();
+
   </script>
 </body>
 </html>
