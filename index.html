@@ -919,6 +919,42 @@
       .container { width: calc(100% - 32px); }
       .section-title { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ─── MOBILE ONLY: remove excessive white gap below header ─── */
+    @media (max-width: 980px) {
+      .hero-inner {
+        padding: 18px 0 20px !important;
+      }
+      .hero-grid {
+        min-height: auto !important;
+        display: block !important;
+      }
+      .hero-panel {
+        margin-top: 18px !important;
+      }
+      .hero-card::after {
+        background-position: center top !important;
+        background-size: cover !important;
+        opacity: .38 !important;
+      }
+      .hero-card::before {
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.84) 0%, rgba(255,255,255,.72) 45%, rgba(255,255,255,.94) 100%) !important;
+      }
+      .hero {
+        padding-top: 0 !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-inner {
+        padding: 14px 0 16px !important;
+      }
+      .hero-panel {
+        margin-top: 10px !important;
+      }
+    }
+
   </style>
 
   <!-- Meta Pixel Code -->
