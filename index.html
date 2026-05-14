@@ -135,56 +135,22 @@
       border-color: rgba(127,168,136,.48);
     }
 
-    /* Online service note */
-    .online-service-note {
+    .online-service-banner {
       margin-top: 18px;
-      border-radius: var(--radius-lg);
-      padding: 18px;
-      background: rgba(255,255,255,.88);
-      border: 1.5px solid rgba(127,168,136,.18);
-      box-shadow: var(--shadow-soft);
-      display: grid;
-      grid-template-columns: minmax(0, .9fr) minmax(260px, .75fr);
-      gap: 18px;
-      align-items: center;
-      overflow: hidden;
     }
-    .online-service-note .note-copy b {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 22px;
-      line-height: 1.12;
-      font-weight: 400;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-    .online-service-note .note-copy p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13.5px;
-      line-height: 1.6;
-      max-width: 58ch;
-    }
-    .online-service-note .note-actions {
-      display: flex;
-      gap: 9px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-    }
-    .online-service-note .note-img {
-      border-radius: 22px;
-      overflow: hidden;
-      background: var(--brand-3);
-      border: 1px solid rgba(127,168,136,.12);
-      min-height: 180px;
-    }
-    .online-service-note .note-img img {
+    .online-service-banner img {
       width: 100%;
-      height: 100%;
-      min-height: 180px;
-      object-fit: cover;
-      object-position: center;
-      transform: scale(1.01);
+      display: block;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(127,168,136,.16);
+    }
+    .online-service-banner-actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
     }
     .mini-note {
       margin-top: 10px;
@@ -924,9 +890,6 @@
       .nav-inner { padding: 14px 0; }
       .brand { min-width: unset; }
       .wa-float { bottom: 20px; right: 20px; }
-      .online-service-note { grid-template-columns: 1fr; padding: 16px; }
-      .online-service-note .note-img { min-height: 160px; }
-      .online-service-note .note-img img { min-height: 160px; }
     }
 
     @media (max-width: 600px) {
@@ -1003,20 +966,11 @@
           Membantu anak &amp; keluarga memahami kebutuhan, menyusun rencana, dan menjalankan pendampingan secara konsisten dengan komunikasi yang mudah dipahami.
         </div>
 
-        <div class="online-service-note">
-          <div class="note-copy">
-            <b>Layanan online tersedia</b>
-            <p>
-              Konseling online bisa dibooking langsung melalui aplikasi. 
-              Asesmen potensi diri / pengembangan karir online tetap melalui admin WhatsApp.
-            </p>
-            <div class="note-actions">
-              <a class="btn booking-soft" href="https://app.calthera.id/booking" target="_blank" rel="noopener">Booking Konseling Online</a>
-              <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Tanya Admin</a>
-            </div>
-          </div>
-          <div class="note-img" aria-hidden="true">
-            <img src="assetsonline-counseling.png" alt="Ilustrasi konseling online Calthera" loading="lazy">
+        <div class="online-service-banner">
+          <img src="assetsonline-counseling.png" alt="Layanan online Calthera">
+          <div class="online-service-banner-actions">
+            <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Tanya Admin</a>
+            <a class="btn booking-soft" href="https://app.calthera.id/booking" target="_blank" rel="noopener">Booking Konseling Online</a>
           </div>
         </div>
 
