@@ -175,6 +175,63 @@
       height: 13.2%;
     }
 
+
+    .online-service-caption {
+      margin-top: 14px;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background:
+        radial-gradient(180px 120px at 95% 0%, rgba(245,165,90,.12), transparent 72%),
+        linear-gradient(135deg, rgba(255,255,255,.96) 0%, rgba(246,240,235,.86) 100%);
+      border: 1px solid rgba(127,168,136,.16);
+      box-shadow: 0 10px 26px rgba(15,23,42,.055);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .online-service-caption .caption-copy {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+    .online-service-caption .caption-icon {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(127,168,136,.10);
+      border: 1px solid rgba(127,168,136,.18);
+      font-size: 20px;
+    }
+    .online-service-caption h3 {
+      font-family: var(--font-display);
+      font-size: 25px;
+      line-height: 1.08;
+      color: #315a3a;
+      font-weight: 400;
+      margin: 0 0 7px;
+      letter-spacing: -.02em;
+    }
+    .online-service-caption p {
+      margin: 0;
+      max-width: 64ch;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .online-service-caption .caption-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex: 0 0 auto;
+    }
+
     .mini-note {
       margin-top: 10px;
       padding: 12px 14px;
@@ -916,6 +973,10 @@
     }
 
     @media (max-width: 600px) {
+
+      .online-service-caption {
+        display: none !important;
+      }
       .container { width: calc(100% - 32px); }
       .section-title { flex-direction: column; align-items: flex-start; }
     }
@@ -1107,6 +1168,20 @@
           <img src="assetsonline-counseling-mobile.png" alt="Layanan online Calthera">
           <a class="banner-hotspot booking" href="https://app.calthera.id/" target="_blank" rel="noopener" aria-label="Booking Konseling Online">Booking Konseling Online</a>
           <a class="banner-hotspot admin" href="https://wa.me/6285219920373" target="_blank" rel="noopener" aria-label="Tanya Admin via WhatsApp">Tanya Admin</a>
+        </div>
+
+        <div class="online-service-caption">
+          <div class="caption-copy">
+            <div class="caption-icon">🌿</div>
+            <div>
+              <h3>Layanan online tersedia</h3>
+              <p>Konseling online bisa dibooking langsung melalui aplikasi. Asesmen potensi diri / pengembangan karir online tetap melalui admin WhatsApp.</p>
+            </div>
+          </div>
+          <div class="caption-actions">
+            <a class="btn primary" href="https://app.calthera.id/" target="_blank" rel="noopener">Booking Konseling Online</a>
+            <a class="btn ghost" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Tanya Admin</a>
+          </div>
         </div>
 
         <div class="online-service-mobile-card">
