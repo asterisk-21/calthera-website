@@ -119,13 +119,13 @@
       margin-top: 2px;
       font-weight: 400;
     }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+    .nav-actions { display: none; }
+    /* Header simplified: no CTA buttons */
+    .nav-inner {
+      justify-content: flex-start;
     }
+    .nav-actions { display: none !important; }
+
 
 
     .btn.booking-soft {
@@ -397,6 +397,33 @@
       gap: 10px;
       flex-wrap: wrap;
       align-items: center;
+    }
+
+
+    /* Clean hero CTA layout */
+    .hero .cta-clean {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      max-width: 620px;
+      margin-top: 4px;
+    }
+    .hero .cta-clean .btn {
+      min-height: 54px;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.25;
+    }
+    .hero .cta-secondary-row {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .hero .cta-secondary-row .btn {
+      min-height: 50px;
     }
 
     /* Trust badge */
@@ -1094,7 +1121,58 @@
       }
     }
 
-  </style>
+  
+    @media (max-width: 720px) {
+      .nav-inner {
+        justify-content: flex-start !important;
+        padding: 12px 0 !important;
+      }
+      .brand {
+        min-width: 0 !important;
+        width: 100%;
+      }
+      .brand .logo img {
+        height: 42px !important;
+      }
+      .brand .text b {
+        font-size: 14px !important;
+      }
+      .brand .text span {
+        font-size: 12px !important;
+        max-width: 220px;
+      }
+      .hero .cta-clean {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        max-width: 100%;
+      }
+      .hero .cta-secondary-row {
+        grid-column: auto !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+      }
+      .hero .cta-clean .btn {
+        width: 100%;
+        min-height: 52px !important;
+        padding: 13px 16px !important;
+        font-size: 14px !important;
+      }
+      .hero .cta-secondary-row .btn {
+        min-height: 48px !important;
+        font-size: 13.5px !important;
+      }
+      .hero-panel {
+        padding-bottom: 28px !important;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .hero .cta-secondary-row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+</style>
 
   <!-- Meta Pixel Code -->
   <script>
@@ -1118,12 +1196,7 @@
             <span>Klinik Psikologi &amp; Tumbuh Kembang Anak</span>
           </div>
         </a>
-        <div class="nav-actions">
-          <a class="btn ghost" href="https://www.instagram.com/calthera.id/" target="_blank" rel="noopener">Instagram</a>
-          <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="btn booking-soft" href="https://app.calthera.id/" target="_blank" rel="noopener">Konseling Online</a>
-        </div>
-      </div>
+</div>
     </div>
   </header>
 
@@ -1141,11 +1214,13 @@
                     Calthera adalah klinik psikologi &amp; tumbuh kembang anak di Pekanbaru.
                     Kami melayani <b>screening</b>, <b>terapi anak</b>, <b>konseling</b>, <b>asesmen psikologis</b>, dan <b>psikoterapi</b>.
                   </p>
-                  <div class="cta">
-                    <a class="btn primary" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
-                    <a class="btn booking-soft" href="https://app.calthera.id/" target="_blank" rel="noopener">Booking Konseling Online</a>
-                    <a class="btn secondary" href="#kontak">Lokasi &amp; Jam Buka</a>
-                    <a class="btn ghost" href="#layanan">Lihat Layanan</a>
+                  <div class="cta cta-clean">
+                    <a class="btn primary cta-main" href="https://wa.me/6285219920373" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
+                    <a class="btn booking-soft cta-main" href="https://app.calthera.id/" target="_blank" rel="noopener">Booking Konseling Online</a>
+                    <div class="cta-secondary-row">
+                      <a class="btn secondary" href="#kontak">Lokasi &amp; Jam Buka</a>
+                      <a class="btn ghost" href="#layanan">Lihat Layanan</a>
+                    </div>
                   </div>
                   <div class="trust-strip">
                     <div class="trust-dot"></div>
